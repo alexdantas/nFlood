@@ -1,0 +1,114 @@
+================================================================================
+                           _PROJECT_ README
+================================================================================
+--------------------------------------------------------------------------------
+Index
+--------------------------------------------------------------------------------
+  1)  Introduction
+  2)  Controls
+  3)  Installation
+  4)  Installation Informations
+  5)  Advanced Installation
+  6)  Uninstallation
+  7)  Advanced Uninstallation
+  8)  Dependencies
+  9)  Main Directory Structure
+  10) Credits/Contact
+  11) License
+
+***
+Note:  Make sure you have libncurses5-dev. See 'Dependences' for more details.
+Note2: In case you don't have libncurses5-dev, this package comes with a
+       compiled binary under /bin for testing purposes. Go for 'make run'!
+***
+--------------------------------------------------------------------------------
+1) Introduction
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+2) Controls
+--------------------------------------------------------------------------------
+
+  Numbers (1~6)   Changes the flood color
+  q               Quits the game at any time
+  r               Resets the game board
+
+--------------------------------------------------------------------------------
+3) Installation
+--------------------------------------------------------------------------------
+
+see INSTALL file
+
+--------------------------------------------------------------------------------
+4) Installation Informations
+--------------------------------------------------------------------------------
+
+see INSTALL file
+
+--------------------------------------------------------------------------------
+5) Advanced Installation
+--------------------------------------------------------------------------------
+
+see INSTALL file
+
+--------------------------------------------------------------------------------
+6) Uninstallation
+--------------------------------------------------------------------------------
+
+see INSTALL file
+
+--------------------------------------------------------------------------------
+7) Advanced Uninstallation
+--------------------------------------------------------------------------------
+
+see INSTALL file
+
+--------------------------------------------------------------------------------
+8) Dependences
+--------------------------------------------------------------------------------
+
+see INSTALL file
+
+--------------------------------------------------------------------------------
+9) Main Directory Structure
+--------------------------------------------------------------------------------
+
+General game information                                             README file
+Installation instructions and information                           INSTALL file
+Copyright and warranty info                                         COPYING file
+Doxygen file for generating the documentation                      Doxyfile file
+Instructions to the 'make' program                                 Makefile file
+Work that needs to be done or ideas for future versions                TODO file
+
+All of the source code files                                         /src folder
+The complete documentation files                                     /doc folder
+Libraries needed and temporary location of object files              /lib folder
+Location of the executable generated after compilation               /bin folder
+
+Complete nFlood documentation                     /doc/nflood documentation file
+
+--------------------------------------------------------------------------------
+10) Contact
+--------------------------------------------------------------------------------
+
+Hello, there! I'm Alexandre Dantas (kure)!
+You can send me comments, bugs, ideas or anything else by email.
+And if you have time, please visit my blog!
+
+My email:   alex.dantas92@gmail.com
+My homepage:    alexdantasblog.wordpress.com
+
+I'd appreciate any commentary - even if it's just "Hello, i play your game!".
+
+--------------------------------------------------------------------------------
+10) Credits
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+11) License
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
