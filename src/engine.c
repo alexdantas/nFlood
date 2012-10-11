@@ -32,7 +32,7 @@
 
 #define TEXT 10
 
-void engine_draw_ui (struct game_board *board)
+void engine_draw_ui (struct game_board *board, int hscore)
 {
 	int i;
 	for (i = 1; i <= 6; i++)
@@ -50,10 +50,12 @@ void engine_draw_ui (struct game_board *board)
 	mvprintw(5, 1, "r: New Game");
 	mvprintw(7, 1, "q: Quit");
 
-	mvprintw(13, 1, "Moves:   %d", board->moves);
+	mvprintw(12, 1, "Moves:   %d", board->moves);
+	mvprintw(13, 1, "Best:    %d", hscore);
 	mvprintw(14, 1, "Flooded: %.0f%%", (float)board->flood_count/(GAME_TABLE_WIDTH * GAME_TABLE_HEIGHT) * 100);
 }
 
+/** Draws the entire game board (with all those colored squares) */
 void engine_draw_board(struct game_board *board)
 {
 	int i; int j;
@@ -110,11 +112,14 @@ int engine_init ()
 		init_pair (GREEN,   bg_color,  COLOR_GREEN);
 		init_pair (YELLOW,  bg_color,  COLOR_YELLOW);
 	}
-
-	raw();
+	else
+	{
+		/* need to replace colors by blocks */
+	}
+   
+	cbreak();
 	curs_set(0);
 	noecho();
-	//nodelay(stdscr, TRUE);
 	keypad(stdscr, TRUE);
 	refresh();
 
@@ -123,9 +128,9 @@ int engine_init ()
 
 void engine_exit ()
 {
-	clear ();
-	refresh ();
-	endwin ();
+	erase();
+	refresh();
+	endwin();
 }
 
 void change_color (int color)

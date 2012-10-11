@@ -26,55 +26,48 @@
  * [Insert Brief Description Here]
  */
 
-
+#include <ncurses.h>
 #include <stdlib.h>
-#include "ncurses.h"
+
 #include "engine.h"
 #include "game.h"
-
+#include "hscores.h"
 
 int main(int argc, char **argv)
 {
 	struct game_board board;
+	int hscore;
 
 	if (engine_init() == -1)
+	{
+		printf("ERROR: Failed to initialize nCurses");
 		return -1;
+	}
 
 	game_init(&board);
 
-	engine_draw_ui(&board);
+	hscore_init();
+	hscore = hscore_get();
+
+	engine_draw_ui(&board, hscore);
 	engine_draw_board(&board);
 
-	int c;
-	do {
+	int c = 0;
+	while (c != 'q')
+	{
+		int will_flood = 0;
+		int color = 0;
+
 		c = getch();
 
 		switch (c)
 		{
-		case '1':
-			flood(&board, 0, 0, BLUE);
-			board.moves++;
-			break;
-		case '2':
-			flood(&board, 0, 0, MAGENTA);
-			board.moves++;
-			break;
-		case '3':
-			flood(&board, 0, 0, RED);
-			board.moves++;
-			break;
-		case '4':
-			flood(&board, 0, 0, YELLOW);
-			board.moves++;
-			break;
-		case '5':
-			flood(&board, 0, 0, GREEN);
-			board.moves++;
-			break;
-		case '6':
-			flood(&board, 0, 0, WHITE);
-			board.moves++;
-			break;
+		case '1': will_flood = 1; color = BLUE;    break;
+		case '2': will_flood = 1; color = MAGENTA; break;
+		case '3': will_flood = 1; color = RED;     break;
+		case '4': will_flood = 1; color = YELLOW;  break;
+		case '5': will_flood = 1; color = GREEN;   break;
+		case '6': will_flood = 1; color = WHITE;   break;
 		case 'r':
 			game_init(&board);
 			break;
@@ -82,12 +75,24 @@ int main(int argc, char **argv)
 			break;
 		}
 
-		clear();
-		engine_draw_ui(&board);
+		if (will_flood)
+		{
+			flood(&board, 0, 0, color);
+			will_flood = 0;
+			board.moves++;
+		}
+
+		erase();
+		engine_draw_ui(&board, hscore);
 		engine_draw_board(&board);
 
-	} while (c != 'q');
-
+		if (game_is_over(&board))
+		{
+			hscore = hscore_get();
+			if (board.moves < hscore)
+				hscore_store(board.moves);
+		}
+	}
 
 	engine_exit();
 

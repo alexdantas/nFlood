@@ -34,10 +34,10 @@
 
 
 int engine_init ();
-void engine_draw_board(struct game_board *board);
+void engine_draw_board (struct game_board *board);
 void engine_exit ();
 void change_color (int color);
-void engine_draw_ui (struct game_board *board);
+void engine_draw_ui (struct game_board *board, int hscore);
 
 
 #endif /* ENGINE_H_DEFINED */

@@ -74,8 +74,8 @@ EXEC    = $(PACKAGE)
 CDEBUG  =
 CFLAGS  = $(CDEBUG) -Wall -Wextra -g
 LIBS    = -lncurses
-OBJ     = $(LOBJ)/engine.o $(LOBJ)/main.o $(LOBJ)/game.o
-DEFINES = -DVERSION=\"$(VERSION)\" -DDATE=\"$(DATE)\"
+OBJ     = $(LOBJ)/engine.o $(LOBJ)/main.o $(LOBJ)/game.o $(LOBJ)/hscores.o
+DEFINES = -DVERSION=\"$(VERSION)\" -DDATE=\"$(DATE)\" -DSCORE_PATH=\""./nflood.scores"\"
 INSTALL = install -s
 
 #-------Distribute--------------------------------------------------------------

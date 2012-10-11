@@ -1,10 +1,10 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
- * _PROJECT_ - _DESCRIPTION_                                                  *
- * Copyright (C) 2011  Alexandre Dantas (kure)                                *
+ * nSnake - The classic snake game with ncurses.                              *
+ * Copyright (C) 2011-2012  Alexandre Dantas (kure)                           *
  *                                                                            *
- * This file is part of _PROJECT_.                                            *
+ * This file is part of nSnake.                                               *
  *                                                                            *
- * _PROJECT_ is free software: you can redistribute it and/or modify          *
+ * nSnake is free software: you can redistribute it and/or modify             *
  * it under the terms of the GNU General Public License as published by       *
  * the Free Software Foundation, either version 3 of the License, or          *
  * any later version.                                                         *
@@ -17,45 +17,28 @@
  * You should have received a copy of the GNU General Public License          *
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.      *
  *                                                                            *
- * homepage: _HOMEPAGE_                                                       *
+ * homepage: http://sourceforge.net/projects/nsnake/                          *
  *                                                                            *
 \* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/**
- * @file game.h
- * [Insert Brief Description Here]
+/**	@file	hscores.h
+ *
+ *	Declaration of the functions and structures related to high scores.
  */
 
-#ifndef GAME_H_DEFINED
-#define GAME_H_DEFINED
-
-enum cell_colors { BLUE = 1, MAGENTA, RED, YELLOW, GREEN, WHITE };
-enum flooded_state { FLOODED = 1, NOT_FLOODED = 0};
-
-#define GAME_WIDTH  44
-#define GAME_HEIGHT 16
-
-#define GAME_TABLE_WIDTH  14
-#define GAME_TABLE_HEIGHT 14
-
-struct game_cell
-{
-	int color;
-	int flooded;
-};
-
-struct game_board
-{
-	struct game_cell cell[GAME_TABLE_WIDTH][GAME_TABLE_HEIGHT];
-	int finished;
-	int flood_count; /** Keeps counting how many cells have been flooded */
-	int moves;
-};
-
-void game_init(struct game_board *board);
-int game_is_over(struct game_board *board);
-int flood (struct game_board *board, int x, int y, int color);
-int random_int_between (int upper, int lower);
+#ifndef HSCORES_DEFINED
+#define HSCORES_DEFINED
 
 
-#endif /* GAME_H_DEFINED */
+/** HighScore of the game mode with borders */
+extern int HIGH_SCORE_BORDERS;
+/** HighScore of the game mode without borders */
+extern int HIGH_SCORE_BORDERS_OFF;
+
+
+void hscore_clean ();
+int hscore_init ();
+int hscore_store (int hscore);
+int hscore_get ();
+
+ #endif
