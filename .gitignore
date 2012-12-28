@@ -1,0 +1,8 @@
+# My git ignore file
+
+# object files
+*.o
+obj/*
+
+# nflood scores
+nflood.scores
