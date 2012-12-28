@@ -236,6 +236,7 @@ on LUIGI
 
 config.status:863: creating Makefile
 config.status:863: creating config.h
+config.status:1044: config.h is unchanged
 config.status:1092: executing depfiles commands
 
 ## ---------------- ##
@@ -289,14 +290,14 @@ am_cv_CC_dependencies_compiler_type=gcc3
 ## Output variables. ##
 ## ----------------- ##
 
-ACLOCAL='${SHELL} /tmp/nFlood/nFlood/missing --run aclocal-1.11'
+ACLOCAL='${SHELL} /mnt/kure/projetos/nFlood/missing --run aclocal-1.11'
 AMDEPBACKSLASH='\'
 AMDEP_FALSE='#'
 AMDEP_TRUE=''
 AMTAR='$${TAR-tar}'
-AUTOCONF='${SHELL} /tmp/nFlood/nFlood/missing --run autoconf'
-AUTOHEADER='${SHELL} /tmp/nFlood/nFlood/missing --run autoheader'
-AUTOMAKE='${SHELL} /tmp/nFlood/nFlood/missing --run automake-1.11'
+AUTOCONF='${SHELL} /mnt/kure/projetos/nFlood/missing --run autoconf'
+AUTOHEADER='${SHELL} /mnt/kure/projetos/nFlood/missing --run autoheader'
+AUTOMAKE='${SHELL} /mnt/kure/projetos/nFlood/missing --run automake-1.11'
 AWK='gawk'
 CC='gcc'
 CCDEPMODE='depmode=gcc3'
@@ -320,7 +321,7 @@ LDFLAGS=''
 LIBOBJS=''
 LIBS='-lncurses '
 LTLIBOBJS=''
-MAKEINFO='${SHELL} /tmp/nFlood/nFlood/missing --run makeinfo'
+MAKEINFO='${SHELL} /mnt/kure/projetos/nFlood/missing --run makeinfo'
 MKDIR_P='/bin/mkdir -p'
 OBJEXT='o'
 PACKAGE='nflood'
@@ -358,7 +359,7 @@ host_alias=''
 htmldir='${docdir}'
 includedir='${prefix}/include'
 infodir='${datarootdir}/info'
-install_sh='${SHELL} /tmp/nFlood/nFlood/install-sh'
+install_sh='${SHELL} /mnt/kure/projetos/nFlood/install-sh'
 libdir='${exec_prefix}/lib'
 libexecdir='${exec_prefix}/libexec'
 localedir='${datarootdir}/locale'
