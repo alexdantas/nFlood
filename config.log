@@ -42,29 +42,29 @@ PATH: /mnt/kure/sbt/bin
 ## Core tests. ##
 ## ----------- ##
 
-configure:2052: checking for a BSD-compatible install
-configure:2120: result: /usr/bin/install -c
-configure:2131: checking whether build environment is sane
-configure:2181: result: yes
-configure:2322: checking for a thread-safe mkdir -p
-configure:2361: result: /bin/mkdir -p
-configure:2374: checking for gawk
-configure:2390: found /usr/bin/gawk
-configure:2401: result: gawk
-configure:2412: checking whether make sets $(MAKE)
-configure:2434: result: yes
-configure:2563: checking for gcc
-configure:2579: found /usr/bin/gcc
-configure:2590: result: gcc
-configure:2819: checking for C compiler version
-configure:2828: gcc --version >&5
+configure:2098: checking for a BSD-compatible install
+configure:2166: result: /usr/bin/install -c
+configure:2177: checking whether build environment is sane
+configure:2227: result: yes
+configure:2368: checking for a thread-safe mkdir -p
+configure:2407: result: /bin/mkdir -p
+configure:2420: checking for gawk
+configure:2436: found /usr/bin/gawk
+configure:2447: result: gawk
+configure:2458: checking whether make sets $(MAKE)
+configure:2480: result: yes
+configure:2609: checking for gcc
+configure:2625: found /usr/bin/gcc
+configure:2636: result: gcc
+configure:2865: checking for C compiler version
+configure:2874: gcc --version >&5
 gcc (Ubuntu/Linaro 4.6.3-1ubuntu5) 4.6.3
 Copyright (C) 2011 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-configure:2839: $? = 0
-configure:2828: gcc -v >&5
+configure:2885: $? = 0
+configure:2874: gcc -v >&5
 Using built-in specs.
 COLLECT_GCC=gcc
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/i686-linux-gnu/4.6/lto-wrapper
@@ -72,62 +72,66 @@ Target: i686-linux-gnu
 Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 4.6.3-1ubuntu5' --with-bugurl=file:///usr/share/doc/gcc-4.6/README.Bugs --enable-languages=c,c++,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.6 --enable-shared --enable-linker-build-id --with-system-zlib --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.6 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --enable-plugin --enable-objc-gc --enable-targets=all --disable-werror --with-arch-32=i686 --with-tune=generic --enable-checking=release --build=i686-linux-gnu --host=i686-linux-gnu --target=i686-linux-gnu
 Thread model: posix
 gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5) 
-configure:2839: $? = 0
-configure:2828: gcc -V >&5
+configure:2885: $? = 0
+configure:2874: gcc -V >&5
 gcc: error: unrecognized option '-V'
 gcc: fatal error: no input files
 compilation terminated.
-configure:2839: $? = 4
-configure:2828: gcc -qversion >&5
+configure:2885: $? = 4
+configure:2874: gcc -qversion >&5
 gcc: error: unrecognized option '-qversion'
 gcc: fatal error: no input files
 compilation terminated.
-configure:2839: $? = 4
-configure:2859: checking whether the C compiler works
-configure:2881: gcc    conftest.c  >&5
-configure:2885: $? = 0
-configure:2933: result: yes
-configure:2936: checking for C compiler default output file name
-configure:2938: result: a.out
-configure:2944: checking for suffix of executables
-configure:2951: gcc -o conftest    conftest.c  >&5
-configure:2955: $? = 0
-configure:2977: result: 
-configure:2999: checking whether we are cross compiling
-configure:3007: gcc -o conftest    conftest.c  >&5
-configure:3011: $? = 0
-configure:3018: ./conftest
-configure:3022: $? = 0
-configure:3037: result: no
-configure:3042: checking for suffix of object files
-configure:3064: gcc -c   conftest.c >&5
+configure:2885: $? = 4
+configure:2905: checking whether the C compiler works
+configure:2927: gcc    conftest.c  >&5
+configure:2931: $? = 0
+configure:2979: result: yes
+configure:2982: checking for C compiler default output file name
+configure:2984: result: a.out
+configure:2990: checking for suffix of executables
+configure:2997: gcc -o conftest    conftest.c  >&5
+configure:3001: $? = 0
+configure:3023: result: 
+configure:3045: checking whether we are cross compiling
+configure:3053: gcc -o conftest    conftest.c  >&5
+configure:3057: $? = 0
+configure:3064: ./conftest
 configure:3068: $? = 0
-configure:3089: result: o
-configure:3093: checking whether we are using the GNU C compiler
-configure:3112: gcc -c   conftest.c >&5
-configure:3112: $? = 0
-configure:3121: result: yes
-configure:3130: checking whether gcc accepts -g
-configure:3150: gcc -c -g  conftest.c >&5
-configure:3150: $? = 0
-configure:3191: result: yes
-configure:3208: checking for gcc option to accept ISO C89
-configure:3272: gcc  -c -g -O2  conftest.c >&5
-configure:3272: $? = 0
-configure:3285: result: none needed
-configure:3316: checking for style of include used by make
-configure:3344: result: GNU
-configure:3370: checking dependency style of gcc
-configure:3481: result: gcc3
-configure:3497: checking whether make sets $(MAKE)
-configure:3519: result: yes
-configure:3538: checking how to run the C preprocessor
-configure:3569: gcc -E  conftest.c
-configure:3569: $? = 0
-configure:3583: gcc -E  conftest.c
-conftest.c:11:28: fatal error: ac_nonexistent.h: No such file or directory
+configure:3083: result: no
+configure:3088: checking for suffix of object files
+configure:3110: gcc -c   conftest.c >&5
+configure:3114: $? = 0
+configure:3135: result: o
+configure:3139: checking whether we are using the GNU C compiler
+configure:3158: gcc -c   conftest.c >&5
+configure:3158: $? = 0
+configure:3167: result: yes
+configure:3176: checking whether gcc accepts -g
+configure:3196: gcc -c -g  conftest.c >&5
+configure:3196: $? = 0
+configure:3237: result: yes
+configure:3254: checking for gcc option to accept ISO C89
+configure:3318: gcc  -c -g -O2  conftest.c >&5
+configure:3318: $? = 0
+configure:3331: result: none needed
+configure:3362: checking for style of include used by make
+configure:3390: result: GNU
+configure:3416: checking dependency style of gcc
+configure:3527: result: gcc3
+configure:3543: checking whether make sets $(MAKE)
+configure:3565: result: yes
+configure:3577: checking for initscr in -lncurses
+configure:3602: gcc -o conftest -g -O2   conftest.c -lncurses   >&5
+configure:3602: $? = 0
+configure:3611: result: yes
+configure:3629: checking how to run the C preprocessor
+configure:3660: gcc -E  conftest.c
+configure:3660: $? = 0
+configure:3674: gcc -E  conftest.c
+conftest.c:12:28: fatal error: ac_nonexistent.h: No such file or directory
 compilation terminated.
-configure:3583: $? = 1
+configure:3674: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "nflood"
@@ -138,15 +142,16 @@ configure: failed program was:
 | #define PACKAGE_URL ""
 | #define PACKAGE "nflood"
 | #define VERSION "0.1"
+| #define HAVE_LIBNCURSES 1
 | /* end confdefs.h.  */
 | #include <ac_nonexistent.h>
-configure:3608: result: gcc -E
-configure:3628: gcc -E  conftest.c
-configure:3628: $? = 0
-configure:3642: gcc -E  conftest.c
-conftest.c:11:28: fatal error: ac_nonexistent.h: No such file or directory
+configure:3699: result: gcc -E
+configure:3719: gcc -E  conftest.c
+configure:3719: $? = 0
+configure:3733: gcc -E  conftest.c
+conftest.c:12:28: fatal error: ac_nonexistent.h: No such file or directory
 compilation terminated.
-configure:3642: $? = 1
+configure:3733: $? = 1
 configure: failed program was:
 | /* confdefs.h */
 | #define PACKAGE_NAME "nflood"
@@ -157,61 +162,62 @@ configure: failed program was:
 | #define PACKAGE_URL ""
 | #define PACKAGE "nflood"
 | #define VERSION "0.1"
+| #define HAVE_LIBNCURSES 1
 | /* end confdefs.h.  */
 | #include <ac_nonexistent.h>
-configure:3671: checking for grep that handles long lines and -e
-configure:3729: result: /bin/grep
-configure:3734: checking for egrep
-configure:3796: result: /bin/grep -E
-configure:3801: checking for ANSI C header files
-configure:3821: gcc -c -g -O2  conftest.c >&5
-configure:3821: $? = 0
-configure:3894: gcc -o conftest -g -O2   conftest.c  >&5
-configure:3894: $? = 0
-configure:3894: ./conftest
-configure:3894: $? = 0
-configure:3905: result: yes
-configure:3918: checking for sys/types.h
-configure:3918: gcc -c -g -O2  conftest.c >&5
-configure:3918: $? = 0
-configure:3918: result: yes
-configure:3918: checking for sys/stat.h
-configure:3918: gcc -c -g -O2  conftest.c >&5
-configure:3918: $? = 0
-configure:3918: result: yes
-configure:3918: checking for stdlib.h
-configure:3918: gcc -c -g -O2  conftest.c >&5
-configure:3918: $? = 0
-configure:3918: result: yes
-configure:3918: checking for string.h
-configure:3918: gcc -c -g -O2  conftest.c >&5
-configure:3918: $? = 0
-configure:3918: result: yes
-configure:3918: checking for memory.h
-configure:3918: gcc -c -g -O2  conftest.c >&5
-configure:3918: $? = 0
-configure:3918: result: yes
-configure:3918: checking for strings.h
-configure:3918: gcc -c -g -O2  conftest.c >&5
-configure:3918: $? = 0
-configure:3918: result: yes
-configure:3918: checking for inttypes.h
-configure:3918: gcc -c -g -O2  conftest.c >&5
-configure:3918: $? = 0
-configure:3918: result: yes
-configure:3918: checking for stdint.h
-configure:3918: gcc -c -g -O2  conftest.c >&5
-configure:3918: $? = 0
-configure:3918: result: yes
-configure:3918: checking for unistd.h
-configure:3918: gcc -c -g -O2  conftest.c >&5
-configure:3918: $? = 0
-configure:3918: result: yes
-configure:3933: checking for stdlib.h
-configure:3933: result: yes
-configure:3933: checking for string.h
-configure:3933: result: yes
-configure:4080: creating ./config.status
+configure:3762: checking for grep that handles long lines and -e
+configure:3820: result: /bin/grep
+configure:3825: checking for egrep
+configure:3887: result: /bin/grep -E
+configure:3892: checking for ANSI C header files
+configure:3912: gcc -c -g -O2  conftest.c >&5
+configure:3912: $? = 0
+configure:3985: gcc -o conftest -g -O2   conftest.c -lncurses  >&5
+configure:3985: $? = 0
+configure:3985: ./conftest
+configure:3985: $? = 0
+configure:3996: result: yes
+configure:4009: checking for sys/types.h
+configure:4009: gcc -c -g -O2  conftest.c >&5
+configure:4009: $? = 0
+configure:4009: result: yes
+configure:4009: checking for sys/stat.h
+configure:4009: gcc -c -g -O2  conftest.c >&5
+configure:4009: $? = 0
+configure:4009: result: yes
+configure:4009: checking for stdlib.h
+configure:4009: gcc -c -g -O2  conftest.c >&5
+configure:4009: $? = 0
+configure:4009: result: yes
+configure:4009: checking for string.h
+configure:4009: gcc -c -g -O2  conftest.c >&5
+configure:4009: $? = 0
+configure:4009: result: yes
+configure:4009: checking for memory.h
+configure:4009: gcc -c -g -O2  conftest.c >&5
+configure:4009: $? = 0
+configure:4009: result: yes
+configure:4009: checking for strings.h
+configure:4009: gcc -c -g -O2  conftest.c >&5
+configure:4009: $? = 0
+configure:4009: result: yes
+configure:4009: checking for inttypes.h
+configure:4009: gcc -c -g -O2  conftest.c >&5
+configure:4009: $? = 0
+configure:4009: result: yes
+configure:4009: checking for stdint.h
+configure:4009: gcc -c -g -O2  conftest.c >&5
+configure:4009: $? = 0
+configure:4009: result: yes
+configure:4009: checking for unistd.h
+configure:4009: gcc -c -g -O2  conftest.c >&5
+configure:4009: $? = 0
+configure:4009: result: yes
+configure:4024: checking for stdlib.h
+configure:4024: result: yes
+configure:4024: checking for string.h
+configure:4024: result: yes
+configure:4171: creating ./config.status
 
 ## ---------------------- ##
 ## Running config.status. ##
@@ -228,10 +234,9 @@ generated by GNU Autoconf 2.68.  Invocation command line was
 
 on LUIGI
 
-config.status:862: creating Makefile
-config.status:862: creating config.h
-config.status:1043: config.h is unchanged
-config.status:1091: executing depfiles commands
+config.status:863: creating Makefile
+config.status:863: creating config.h
+config.status:1092: executing depfiles commands
 
 ## ---------------- ##
 ## Cache variables. ##
@@ -266,6 +271,7 @@ ac_cv_header_strings_h=yes
 ac_cv_header_sys_stat_h=yes
 ac_cv_header_sys_types_h=yes
 ac_cv_header_unistd_h=yes
+ac_cv_lib_ncurses_initscr=yes
 ac_cv_objext=o
 ac_cv_path_EGREP='/bin/grep -E'
 ac_cv_path_GREP=/bin/grep
@@ -312,7 +318,7 @@ INSTALL_SCRIPT='${INSTALL}'
 INSTALL_STRIP_PROGRAM='$(install_sh) -c -s'
 LDFLAGS=''
 LIBOBJS=''
-LIBS=''
+LIBS='-lncurses '
 LTLIBOBJS=''
 MAKEINFO='${SHELL} /tmp/nFlood/nFlood/missing --run makeinfo'
 MKDIR_P='/bin/mkdir -p'
@@ -382,6 +388,7 @@ target_alias=''
 #define PACKAGE_URL ""
 #define PACKAGE "nflood"
 #define VERSION "0.1"
+#define HAVE_LIBNCURSES 1
 #define STDC_HEADERS 1
 #define HAVE_SYS_TYPES_H 1
 #define HAVE_SYS_STAT_H 1

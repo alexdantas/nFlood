@@ -110,7 +110,7 @@ INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LDFLAGS = 
 LIBOBJS = 
-LIBS = 
+LIBS = -lncurses 
 LTLIBOBJS = 
 MAKEINFO = ${SHELL} /tmp/nFlood/nFlood/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
@@ -174,6 +174,7 @@ top_srcdir = .
 AM_CFLAGS = -g -Wall
 nflood_SOURCES = src/main.c src/engine.c src/game.c src/hscores.c
 noinst_HEADERS = src/engine.h src/game.h src/hscores.h
+noinst_DIST = Doxyfile
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 

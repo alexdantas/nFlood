@@ -1,4 +1,4 @@
-#                                               -*- Autoconf -*-
+1;3201;0c#                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.68])
@@ -13,6 +13,7 @@ AC_PROG_INSTALL
 AC_PROG_MAKE_SET
 
 # Checks for libraries.
+AC_CHECK_LIB([ncurses], [initscr])
 
 # Checks for header files.
 AC_CHECK_HEADERS([stdlib.h string.h])
