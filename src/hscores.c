@@ -32,6 +32,8 @@
 //	but it depends on the installation directory set by the user
 
 
+#define SCORE_PATH "./nflood.scores"
+
 // If we're on Windows, there's no /var/games!
 // So we create the file on the same directory as the .exe
 #if (defined __WIN32__) && (!defined __CYGWIN__)
