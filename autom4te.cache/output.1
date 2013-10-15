@@ -565,7 +565,6 @@ PACKAGE_STRING='nflood 0.1'
 PACKAGE_BUGREPORT='alex.dantas92@gmail.com'
 PACKAGE_URL=''
 
-ac_unique_file="config.h.in"
 # Factoring default headers for most tests.
 ac_includes_default="\
 #include <stdio.h>
@@ -2046,9 +2045,8 @@ ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
-
+# AC_CONFIG_SRCDIR([config.h.in])
 ac_config_headers="$ac_config_headers config.h"
-
 
 am__api_version='1.11'
 
@@ -2552,6 +2550,7 @@ MAKEINFO=${MAKEINFO-"${am_missing_run}makeinfo"}
 AMTAR='$${TAR-tar}'
 
 am__tar='$${TAR-tar} chof - "$$tardir"' am__untar='$${TAR-tar} xf -'
+
 
 
 
@@ -4036,7 +4035,8 @@ done
 
 # Checks for library functions.
 
-ac_config_files="$ac_config_files Makefile"
+ac_config_files="$ac_config_files Makefile src/Makefile"
+
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -4770,6 +4770,7 @@ do
     "config.h") CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
+    "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac
@@ -5499,7 +5500,7 @@ $as_echo "$as_me: WARNING: unrecognized options: $ac_unrecognized_opts" >&2;}
 fi
 
 
-#My custom banner after ./configure
+# My custom banner after ./configure
 echo \
 "
 Thank you for using ${PACKAGE_NAME} version ${PACKAGE_VERSION}!
