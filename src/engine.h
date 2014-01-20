@@ -1,10 +1,10 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
- * _PROJECT_ - _DESCRIPTION_                                                  *
+ * nFlood - Puzzle game on the terminal.                                                  *
  * Copyright (C) 2011  Alexandre Dantas (kure)                                *
  *                                                                            *
- * This file is part of _PROJECT_.                                            *
+ * This file is part of nFlood.                                            *
  *                                                                            *
- * _PROJECT_ is free software: you can redistribute it and/or modify          *
+ * nFlood is free software: you can redistribute it and/or modify          *
  * it under the terms of the GNU General Public License as published by       *
  * the Free Software Foundation, either version 3 of the License, or          *
  * any later version.                                                         *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License          *
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.      *
  *                                                                            *
- * homepage: _HOMEPAGE_                                                       *
+ * homepage: http://alexdantas.net/projects/nflood                                                       *
  *                                                                            *
 \* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
