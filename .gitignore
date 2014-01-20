@@ -1,8 +1,7 @@
 # My git ignore file
 
-# object files
-*.o
 obj/*
+*.o
+bin/nflood
 
-# nflood scores
 nflood.scores
