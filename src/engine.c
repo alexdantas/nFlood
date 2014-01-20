@@ -123,6 +123,8 @@ int engine_init ()
 	keypad(stdscr, TRUE);
 	refresh();
 
+	mousemask(BUTTON1_CLICKED, NULL);
+
 	return 0;
 }
 
