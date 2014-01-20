@@ -33,7 +33,7 @@
 #include "game.h"
 #include "hscores.h"
 
-int main(int argc, char **argv)
+int main()
 {
 	struct game_board board;
 	int hscore;

@@ -81,7 +81,6 @@ int hscore_init ()
 {
 	FILE* file = fopen (SCORE_PATH, "rb");
 
-	int cant_open_hscore_file = 0;
 	int hscore;
 
 	if (file == NULL)
@@ -93,17 +92,13 @@ int hscore_init ()
 
 		items_read = fread (&hscore, sizeof (int), 1, file);
 		if (items_read != 1)
-			//nsnake_abort ("Highscore File I/O error!\nTry cleaning the scores file!");
 			return -1;
 	}
 
 	file = fopen (SCORE_PATH, "rb");
 	if (file == NULL)
-	{
 		//This time it really couldnt open the score file
-		//cant_open_hscore_file = 1;
 		return -1;
-	}
 	else
 		fclose (file);
 
