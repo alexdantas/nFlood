@@ -5,13 +5,14 @@
 
 #define TEXT 10
 
-void engine_draw_ui (struct game_board *board, int hscore)
+void engine_draw_ui(struct game_board *board, int hscore)
 {
 	int i;
 	for (i = 1; i <= 6; i++)
 	{
 		if (i == board->last_color)
 			continue;
+
 		change_color(i);
 		mvaddch(1, -1 + (2*i), ' ');
 
@@ -46,7 +47,7 @@ void engine_draw_board(struct game_board *board)
 	}
 }
 
-int engine_init ()
+int engine_init()
 {
 	initscr();
 
@@ -72,12 +73,12 @@ int engine_init ()
 		else
 			bg_color = -1;
 /*
-		init_pair (BLUE,    COLOR_BLUE,    bg_color);
-		init_pair (MAGENTA, COLOR_MAGENTA, bg_color);
-		init_pair (WHITE,   COLOR_WHITE,   bg_color);
-		init_pair (RED,     COLOR_RED,     bg_color);
-		init_pair (GREEN,   COLOR_GREEN,   bg_color);
-		init_pair (YELLOW,  COLOR_YELLOW,  bg_color);
+  init_pair (BLUE,    COLOR_BLUE,    bg_color);
+  init_pair (MAGENTA, COLOR_MAGENTA, bg_color);
+  init_pair (WHITE,   COLOR_WHITE,   bg_color);
+  init_pair (RED,     COLOR_RED,     bg_color);
+  init_pair (GREEN,   COLOR_GREEN,   bg_color);
+  init_pair (YELLOW,  COLOR_YELLOW,  bg_color);
 */
 		init_pair (TEXT,     COLOR_WHITE, bg_color);
 		init_pair (BLUE,    bg_color,  COLOR_BLUE);
@@ -103,14 +104,14 @@ int engine_init ()
 	return 0;
 }
 
-void engine_exit ()
+void engine_exit()
 {
 	erase();
 	refresh();
 	endwin();
 }
 
-void change_color (int color)
+void change_color(int color)
 {
 	if (has_colors () == TRUE)
 		attron (COLOR_PAIR(color));

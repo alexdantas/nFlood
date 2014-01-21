@@ -24,12 +24,14 @@
 
 /** HighScore of the game mode with borders */
 extern int HIGH_SCORE_BORDERS;
+
 /** HighScore of the game mode without borders */
 extern int HIGH_SCORE_BORDERS_OFF;
 
-void hscore_clean ();
-int hscore_init ();
-int hscore_store (int hscore);
-int hscore_get ();
+void hscore_clean();
+int hscore_init();
+int hscore_store(int hscore);
+int hscore_get();
 
- #endif
+#endif /* HSCORES_H_DEFINED */
+

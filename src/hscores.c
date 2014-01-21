@@ -11,8 +11,8 @@
  * So we create the file on the same directory as the .exe
  */
 #if (defined __WIN32__) && (!defined __CYGWIN__)
-	#undef  SCORE_PATH
-	#define SCORE_PATH "hscores.bin"
+#undef  SCORE_PATH
+#define SCORE_PATH "hscores.bin"
 #endif
 
 #include <stdio.h>
@@ -28,7 +28,7 @@ int HIGH_SCORE_DEFAULT = 25;
  *
  *  @note If the Highscores file doesn't exist, it is created.
  */
-void hscore_clean ()
+void hscore_clean()
 {
 	FILE* file = fopen (SCORE_PATH, "wb");
 
@@ -49,7 +49,7 @@ void hscore_clean ()
  *        Currently, it is /var/games/.nsnake.scores
  *	@todo clean this code. Lots of useless ifs and elses.
  */
-int hscore_init ()
+int hscore_init()
 {
 	FILE* file = fopen (SCORE_PATH, "rb");
 
@@ -80,7 +80,7 @@ int hscore_init ()
 
 /**	Records the player High Score
  */
-int hscore_store (int score)
+int hscore_store(int score)
 {
 	FILE* file = fopen (SCORE_PATH, "r+b");
 
@@ -100,7 +100,7 @@ int hscore_store (int score)
 	return 0;
 }
 
-int hscore_get ()
+int hscore_get()
 {
 	int hscore = HIGH_SCORE_DEFAULT;
 	FILE* file = fopen (SCORE_PATH, "rb");

@@ -22,8 +22,8 @@
 #ifndef GAME_H_DEFINED
 #define GAME_H_DEFINED
 
-enum cell_colors { BLUE = 1, MAGENTA, RED, YELLOW, GREEN, WHITE };
-enum flooded_state { FLOODED = 1, NOT_FLOODED = 0};
+enum cell_colors   { BLUE = 1, MAGENTA, RED, YELLOW, GREEN, WHITE };
+enum flooded_state { BOARD_NOT_FLOODED, BOARD_FLOOD };
 
 #define GAME_WIDTH  44
 #define GAME_HEIGHT 16
@@ -48,8 +48,8 @@ struct game_board
 
 void game_init(struct game_board *board);
 int game_is_over(struct game_board *board);
-int flood (struct game_board *board, int x, int y, int color);
-int random_int_between (int upper, int lower);
-
+int flood(struct game_board *board, int x, int y, int color);
+int random_int_between(int upper, int lower);
 
 #endif /* GAME_H_DEFINED */
+

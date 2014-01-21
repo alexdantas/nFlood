@@ -56,7 +56,7 @@ int main()
 			}
 			// the main board
 			else if ((event.x >= 16 && event.x < 16 + GAME_TABLE_WIDTH * 2)
-			&&	 (event.y >=  1 && event.y <  1 + GAME_TABLE_HEIGHT))
+			         &&	 (event.y >=  1 && event.y <  1 + GAME_TABLE_HEIGHT))
 			{
 				will_flood = 1;
 				color = board.cell[(event.x - 16) / 2][event.y - 1].color;
