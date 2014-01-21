@@ -50,6 +50,7 @@ void game_init(struct game_board *board)
 
 	board->flood_count = 0;
 	board->moves = 0;
+	board->last_color = board->cell[0][0].color;
 
 	flood(board, 0, 0, board->cell[0][0].color);
 }

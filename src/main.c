@@ -93,10 +93,11 @@ int main()
 			break;
 		}
 
-		if (will_flood)
+		if (will_flood && board.last_color != color)
 		{
 			flood(&board, 0, 0, color);
 			will_flood = 0;
+			board.last_color = color;
 			board.moves++;
 		}
 

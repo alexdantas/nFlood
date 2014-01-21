@@ -37,6 +37,8 @@ void engine_draw_ui (struct game_board *board, int hscore)
 	int i;
 	for (i = 1; i <= 6; i++)
 	{
+		if (i == board->last_color)
+			continue;
 		change_color(i);
 		mvaddch(1, -1 + (2*i), ' ');
 

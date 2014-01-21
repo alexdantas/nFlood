@@ -50,6 +50,7 @@ struct game_board
 	int finished;
 	int flood_count; /** Keeps counting how many cells have been flooded */
 	int moves;
+	int last_color; /** last flooded color */
 };
 
 void game_init(struct game_board *board);
