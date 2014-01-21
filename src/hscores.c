@@ -1,53 +1,25 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
- * nSnake - The classic snake game with ncurses.                              *
- * Copyright (C) 2011-2012  Alexandre Dantas (kure)                           *
- *                                                                            *
- * This file is part of nSnake.                                               *
- *                                                                            *
- * nSnake is free software: you can redistribute it and/or modify             *
- * it under the terms of the GNU General Public License as published by       *
- * the Free Software Foundation, either version 3 of the License, or          *
- * any later version.                                                         *
- *                                                                            *
- * This program is distributed in the hope that it will be useful,            *
- * but WITHOUT ANY WARRANTY; without even the implied warranty of             *
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              *
- * GNU General Public License for more details.                               *
- *                                                                            *
- * You should have received a copy of the GNU General Public License          *
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.      *
- *                                                                            *
- * homepage: http://sourceforge.net/projects/nsnake/                          *
- *                                                                            *
-\* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/** @file hscores.c
- *
- *	Definition of the functions related to high scores.
+/* We also get a define from the Makefile called SCORE_PATH
+ * It indicates the whole path to the scores file.
+ * By default, it is /var/games/nsnake/high.scores
+ * but it depends on the installation directory set by the user
  */
-
-//	We also get a define from the Makefile called SCORE_PATH
-//	It indicates the whole path to the scores file.
-//	By default, it is /var/games/nsnake/high.scores
-//	but it depends on the installation directory set by the user
-
 
 #define SCORE_PATH "./nflood.scores"
 
-// If we're on Windows, there's no /var/games!
-// So we create the file on the same directory as the .exe
+/* If we're on Windows, there's no /var/games!
+ * So we create the file on the same directory as the .exe
+ */
 #if (defined __WIN32__) && (!defined __CYGWIN__)
 	#undef  SCORE_PATH
 	#define SCORE_PATH "hscores.bin"
 #endif
-
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "hscores.h"
-
 
 /** The Default HighScore */
 int HIGH_SCORE_DEFAULT = 25;
