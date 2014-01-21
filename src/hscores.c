@@ -24,10 +24,6 @@
 /** The Default HighScore */
 int HIGH_SCORE_DEFAULT = 25;
 
-/** Restore the Highscores to the default.
- *
- *  @note If the Highscores file doesn't exist, it is created.
- */
 void hscore_clean()
 {
 	FILE* file = fopen (SCORE_PATH, "wb");
@@ -39,16 +35,6 @@ void hscore_clean()
 	}
 }
 
-
-/**	Creates/reads from the High Score file
- *
- * 	First, we try to open for reading. If it doesn't exist, then we
- *  open it for writing, effectively creating it.
- *
- *  @note The path to the score file is defined by the Makefile.
- *        Currently, it is /var/games/.nsnake.scores
- *	@todo clean this code. Lots of useless ifs and elses.
- */
 int hscore_init()
 {
 	FILE* file = fopen (SCORE_PATH, "rb");
@@ -77,9 +63,6 @@ int hscore_init()
 	return 0;
 }
 
-
-/**	Records the player High Score
- */
 int hscore_store(int score)
 {
 	FILE* file = fopen (SCORE_PATH, "r+b");
@@ -130,3 +113,4 @@ int hscore_get()
 
 	return hscore;
 }
+

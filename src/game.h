@@ -24,8 +24,15 @@
 
 #include <stdbool.h>
 
-enum cell_colors   { BLUE = 1, MAGENTA, RED, YELLOW, GREEN, WHITE };
-enum flooded_state { BOARD_NOT_FLOODED, BOARD_FLOOD };
+enum cell_colors
+{
+	BLUE = 1, MAGENTA, RED, YELLOW, GREEN, WHITE
+};
+
+enum flooded_state
+{
+	BOARD_NOT_FLOODED, BOARD_FLOOD
+};
 
 #define GAME_WIDTH  44
 #define GAME_HEIGHT 16
@@ -48,9 +55,23 @@ struct game_board
 	int last_color; /** last flooded color */
 };
 
+/** Initializes the `board` with random colors for
+ *  all cells, cleaning the `flooded` state.
+ */
 void game_init(struct game_board *board);
+
+/** Tells if the board is completely flooded.
+ */
 bool game_is_over(struct game_board *board);
+
+/** Recursive function that floads `board` on `x`/`y`
+ *  with `color`.
+ */
 int flood(struct game_board *board, int x, int y, int color);
+
+/** Returns a random integer between the limits
+ *  passed as parameters.
+ */
 int random_int_between(int upper, int lower);
 
 #endif /* GAME_H_DEFINED */

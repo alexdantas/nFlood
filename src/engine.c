@@ -31,7 +31,6 @@ void engine_draw_ui(struct game_board *board, int hscore)
 	mvprintw(14, 1, "Flooded: %.0f%%", (float)board->flood_count/(GAME_TABLE_WIDTH * GAME_TABLE_HEIGHT) * 100);
 }
 
-/** Draws the entire game board (with all those colored squares) */
 void engine_draw_board(struct game_board *board)
 {
 	int i; int j;

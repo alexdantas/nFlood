@@ -3,9 +3,6 @@
 #include <time.h>
 #include "game.h"
 
-/** Initializes the `board` with random colors for
- *  all cells, cleaning the `flooded` state
- */
 void game_init(struct game_board *board)
 {
 	int i; int j;
@@ -26,8 +23,6 @@ void game_init(struct game_board *board)
 	flood(board, 0, 0, board->cell[0][0].color);
 }
 
-/** Tells if the board is completely flooded.
- */
 bool game_is_over(struct game_board *board)
 {
 	if (board->flood_count == (GAME_TABLE_WIDTH * GAME_TABLE_HEIGHT))
@@ -36,17 +31,11 @@ bool game_is_over(struct game_board *board)
 		return false;
 }
 
-/** Returns a random integer between the limits
- *  passed as parameters.
- */
 int random_int_between (int upper, int lower)
 {
 	return rand() % (upper - lower + 1) + lower;
 }
 
-/** Recursive function that floads `board` on `x`/`y`
- *  with `color`.
- */
 int flood (struct game_board *board, int x, int y, int color)
 {
 	if ((x >= GAME_TABLE_WIDTH) || (y >= GAME_TABLE_HEIGHT))

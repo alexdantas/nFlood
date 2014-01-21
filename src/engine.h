@@ -25,9 +25,14 @@
 #include "game.h"
 
 int engine_init();
+
 void engine_draw_board(struct game_board *board);
+
 void engine_exit();
+
 void change_colo(int color);
+
+/** Draws the entire game board (with all those colored squares) */
 void engine_draw_ui(struct game_board *board, int hscore);
 
 #endif /* ENGINE_H_DEFINED */
