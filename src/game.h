@@ -22,6 +22,8 @@
 #ifndef GAME_H_DEFINED
 #define GAME_H_DEFINED
 
+#include <stdbool.h>
+
 enum cell_colors   { BLUE = 1, MAGENTA, RED, YELLOW, GREEN, WHITE };
 enum flooded_state { BOARD_NOT_FLOODED, BOARD_FLOOD };
 
@@ -34,7 +36,7 @@ enum flooded_state { BOARD_NOT_FLOODED, BOARD_FLOOD };
 struct game_cell
 {
 	int color;
-	int flooded;
+	bool flooded;
 };
 
 struct game_board
@@ -47,7 +49,7 @@ struct game_board
 };
 
 void game_init(struct game_board *board);
-int game_is_over(struct game_board *board);
+bool game_is_over(struct game_board *board);
 int flood(struct game_board *board, int x, int y, int color);
 int random_int_between(int upper, int lower);
 

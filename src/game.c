@@ -3,7 +3,6 @@
 #include <time.h>
 #include "game.h"
 
-
 /** Initializes the `board` with random colors for
  *  all cells, cleaning the `flooded` state
  */
@@ -27,15 +26,14 @@ void game_init(struct game_board *board)
 	flood(board, 0, 0, board->cell[0][0].color);
 }
 
-/** Returns `BOARD_FLOODED` if the board is
- *  completely flooded, `BOARD_NOT_FLOODED` otherwise.
+/** Tells if the board is completely flooded.
  */
-int game_is_over(struct game_board *board)
+bool game_is_over(struct game_board *board)
 {
-	if (board->flood_count == GAME_TABLE_WIDTH * GAME_TABLE_HEIGHT)
-		return FLOODED;
+	if (board->flood_count == (GAME_TABLE_WIDTH * GAME_TABLE_HEIGHT))
+		return true;
 	else
-		return NOT_FLOODED;
+		return false;
 }
 
 /** Returns a random integer between the limits
@@ -57,7 +55,7 @@ int flood (struct game_board *board, int x, int y, int color)
 		return 1;
 
 	// The cell is flooded and now we need to refresh it's color
-	if (board->cell[x][y].flooded == FLOODED)
+	if (board->cell[x][y].flooded == true)
 		if (board->cell[x][y].color != color)
 			board->cell[x][y].color = color;
 	// The cell is already flooded and with the same color
@@ -68,7 +66,7 @@ int flood (struct game_board *board, int x, int y, int color)
 		// The cell is not flooded but the color is the same
 		if (board->cell[x][y].color == color)
 		{
-			board->cell[x][y].flooded = FLOODED;
+			board->cell[x][y].flooded = true;
 			board->flood_count++;
 		}
 		// The cell is not flooded and the color is not the same
