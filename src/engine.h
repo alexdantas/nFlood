@@ -23,6 +23,10 @@
 
 #include "game.h"
 
+/* Pre-defined sizes of the User Interface (including the `board`)*/
+#define GAME_UI_WIDTH  44
+#define GAME_UI_HEIGHT 16
+
 /** Contains global information about nCurses */
 struct engine_t
 {

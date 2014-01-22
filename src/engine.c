@@ -13,9 +13,9 @@ int engine_init()
 	int current_height, current_width;
 	getmaxyx(stdscr, current_height, current_width);
 
-	if ((current_width < GAME_WIDTH) || (current_height < GAME_HEIGHT))
+	if ((current_width  < GAME_UI_WIDTH) ||
+	    (current_height < GAME_UI_HEIGHT))
 	{
-		// ABORT!
 		endwin();
 		return -1;
 	}
@@ -74,8 +74,8 @@ void engine_exit()
 
 void engine_draw_ui(struct game_board *board, int hscore)
 {
-	int center_top  = engine.height/2 - 5;
-	int center_left = engine.width/2  - 30;
+	int center_top  = engine.height/2 - GAME_UI_HEIGHT/2;
+	int center_left = engine.width/2  - GAME_UI_WIDTH/2;
 
 	if (!game_is_over(board))
 	{
@@ -111,8 +111,8 @@ void engine_draw_ui(struct game_board *board, int hscore)
 
 void engine_draw_board(struct game_board *board)
 {
-	int center_top  = engine.height/2 - 5;
-	int center_left = engine.width/2  - 30;
+	int center_top  = engine.height/2 - GAME_UI_HEIGHT/2;
+	int center_left = engine.width/2  - GAME_UI_WIDTH/2;
 
 	int i; int j;
 

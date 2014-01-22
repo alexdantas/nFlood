@@ -33,9 +33,7 @@ enum flooded_state
 	BOARD_NOT_FLOODED, BOARD_FLOOD
 };
 
-#define GAME_WIDTH  44
-#define GAME_HEIGHT 16
-
+/* How many cells we got on a board */
 #define GAME_TABLE_WIDTH  14
 #define GAME_TABLE_HEIGHT 14
 
