@@ -130,6 +130,8 @@ void engine_draw_ui(struct game_board *board, int hscore)
 
 	change_color(TEXT);
 
+	mvprintw(engine.center_top + 6, engine.center_left + 1, "nFlood v" VERSION);
+
 	mvprintw(engine.center_top + 8, engine.center_left + 1, "r: New Game");
 	mvprintw(engine.center_top + 9, engine.center_left + 1, "q: Quit");
 
