@@ -1,8 +1,15 @@
 # nFlood
 
-nFlood is a puzzle game just like [Flood-It](http://unixpapa.com/floodit/).
+nFlood is a simple clone of the *Flood-It* puzzle game.
 
-It's played on the terminal, with text-based interface.
+You need to fill the whole board with a single color.
+To do that, alternate between them, flooding with the
+minimum number of moves possible.
+
+It's played on the terminal, with text-based interface
+via nCurses.
+
+Heavily based on [those](http://unixpapa.com/floodit/) [three](http://floodit.appspot.com) online [games](http://cdn.labpixies.com/campaigns/flood/flood.html).
 
 ## Usage
 
@@ -16,6 +23,7 @@ Then, simply download (or `git clone` it) and `make` it
 ## Screenshots
 
 ![screen1](http://alexdantas.net/projects/nflood/images/game.png)
+
 ![screen2](http://alexdantas.net/projects/nflood/images/game2.png)
 
 ## Controls
