@@ -79,53 +79,27 @@ void engine_draw_ui(struct game_board *board, int hscore)
 {
 	if (!game_is_over(board))
 	{
-		/* I know the following is very ugly,
-		 * will try to find out a general formula to do this. */
+                int i, x, y;
+                for (i = 1; i <= 6; i++)
+                {
+                        if (i == board->last_color)
+                                continue;
 
-		/* 1 */
-		change_color(1);
-		mvaddstr(engine.center_top,    engine.center_left - 1 + 2, "  ");
+			y = (i - 1)/4;
+			x = i - 1 - 4*y;
+                        change_color(i);
+                        mvaddstr(engine.center_top + 3*y,
+                                 engine.center_left + 3*x + 1,
+                                 "  ");
 
-		change_color(TEXT);
-		mvaddch(engine.center_top + 1, engine.center_left - 1 + 2, '1');
+                        change_color(TEXT);
+                        mvaddch(engine.center_top + 3*y + 1,
+                                engine.center_left + 3*x + 1,
+                                '1' + (i - 1));
+                }
 
-		/* 2 */
-		change_color(2);
-		mvaddstr(engine.center_top,    engine.center_left + 4, "  ");
-
-		change_color(TEXT);
-		mvaddch(engine.center_top + 1, engine.center_left + 4, '2');
-
-		/* 3 */
-		change_color(3);
-		mvaddstr(engine.center_top,    engine.center_left + 1 + 6, "  ");
-
-		change_color(TEXT);
-		mvaddch(engine.center_top + 1, engine.center_left + 1 + 6, '3');
-
-		/* 4 */
-		change_color(4);
-		mvaddstr(engine.center_top,    engine.center_left + 2 + 8, "  ");
-
-		change_color(TEXT);
-		mvaddch(engine.center_top + 1, engine.center_left + 2 + 8, '4');
-
-		/* 5 */
-		change_color(5);
-		mvaddstr(engine.center_top + 3, engine.center_left - 1 + 2, "  ");
-
-		change_color(TEXT);
-		mvaddch(engine.center_top + 4,  engine.center_left - 1 + 2, '5');
-
-		/* 6 */
-		change_color(6);
-		mvaddstr(engine.center_top + 3, engine.center_left + 4, "  ");
-
-		change_color(TEXT);
-		mvaddch(engine.center_top + 4,  engine.center_left + 4, '6');
-
-		change_color(TEXT);
-		mvprintw(engine.center_top, engine.center_left + 13, "->");
+                change_color(TEXT);
+                mvprintw(engine.center_top, engine.center_left + 13, "->");
 	}
 
 	change_color(TEXT);
