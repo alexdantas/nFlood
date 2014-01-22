@@ -101,6 +101,12 @@ void engine_draw_ui(struct game_board *board, int hscore)
                 change_color(TEXT);
                 mvprintw(engine.center_top, engine.center_left + 13, "->");
 	}
+	else
+	{
+                change_color(TEXT);
+                mvprintw(engine.center_top,     engine.center_left + 1, "Congrats!");
+                mvprintw(engine.center_top + 1, engine.center_left + 1, "one more game?");
+	}
 
 	change_color(TEXT);
 
