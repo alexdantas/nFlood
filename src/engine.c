@@ -22,6 +22,9 @@ int engine_init()
 	engine.width  = current_width;
 	engine.height = current_height;
 
+	engine.center_top  = engine.height/2 - GAME_UI_HEIGHT/2;
+	engine.center_left = engine.width/2  - GAME_UI_WIDTH/2;
+
 	if (has_colors() == TRUE)
 	{
 		int bg_color;
@@ -74,46 +77,69 @@ void engine_exit()
 
 void engine_draw_ui(struct game_board *board, int hscore)
 {
-	int center_top  = engine.height/2 - GAME_UI_HEIGHT/2;
-	int center_left = engine.width/2  - GAME_UI_WIDTH/2;
-
 	if (!game_is_over(board))
 	{
-		int i;
-		for (i = 1; i <= 6; i++)
-		{
-			if (i == board->last_color)
-				continue;
+		/* I know the following is very ugly,
+		 * will try to find out a general formula to do this. */
 
-			change_color(i);
-			mvaddch(center_top,
-			        center_left - 1 + (2*i),
-			        ' ');
-
-			change_color(TEXT);
-			mvaddch(center_top + 1,
-			        center_left - 1 + (2*i),
-			        '1' + (i - 1));
-		}
+		/* 1 */
+		change_color(1);
+		mvaddstr(engine.center_top,    engine.center_left - 1 + 2, "  ");
 
 		change_color(TEXT);
-		mvprintw(center_top, center_left + 13, "->");
+		mvaddch(engine.center_top + 1, engine.center_left - 1 + 2, '1');
+
+		/* 2 */
+		change_color(2);
+		mvaddstr(engine.center_top,    engine.center_left + 4, "  ");
+
+		change_color(TEXT);
+		mvaddch(engine.center_top + 1, engine.center_left + 4, '2');
+
+		/* 3 */
+		change_color(3);
+		mvaddstr(engine.center_top,    engine.center_left + 1 + 6, "  ");
+
+		change_color(TEXT);
+		mvaddch(engine.center_top + 1, engine.center_left + 1 + 6, '3');
+
+		/* 4 */
+		change_color(4);
+		mvaddstr(engine.center_top,    engine.center_left + 2 + 8, "  ");
+
+		change_color(TEXT);
+		mvaddch(engine.center_top + 1, engine.center_left + 2 + 8, '4');
+
+		/* 5 */
+		change_color(5);
+		mvaddstr(engine.center_top + 3, engine.center_left - 1 + 2, "  ");
+
+		change_color(TEXT);
+		mvaddch(engine.center_top + 4,  engine.center_left - 1 + 2, '5');
+
+		/* 6 */
+		change_color(6);
+		mvaddstr(engine.center_top + 3, engine.center_left + 4, "  ");
+
+		change_color(TEXT);
+		mvaddch(engine.center_top + 4,  engine.center_left + 4, '6');
+
+		change_color(TEXT);
+		mvprintw(engine.center_top, engine.center_left + 13, "->");
 	}
 
 	change_color(TEXT);
-	mvprintw(center_top + 5, center_left + 1, "r: New Game");
-	mvprintw(center_top + 7, center_left + 1, "q: Quit");
 
-	mvprintw(center_top + 11, center_left + 1, "Moves:   %d", board->moves);
-	mvprintw(center_top + 12, center_left + 1, "Best:    %d", hscore);
-	mvprintw(center_top + 13, center_left + 1, "Flooded: %.0f%%", (float)board->flood_count/(GAME_TABLE_WIDTH * GAME_TABLE_HEIGHT) * 100);
+	mvprintw(engine.center_top + 8, engine.center_left + 1, "r: New Game");
+	mvprintw(engine.center_top + 9, engine.center_left + 1, "q: Quit");
+
+	mvprintw(engine.center_top + 11, engine.center_left + 1, "Moves:   %d", board->moves);
+	mvprintw(engine.center_top + 12, engine.center_left + 1, "Best:    %d", hscore);
+	mvprintw(engine.center_top + 13, engine.center_left + 1, "Flooded: %.0f%%", (float)board->flood_count/(GAME_TABLE_WIDTH * GAME_TABLE_HEIGHT) * 100);
 }
 
 void engine_draw_board(struct game_board *board)
 {
-	int center_top  = engine.height/2 - GAME_UI_HEIGHT/2;
-	int center_left = engine.width/2  - GAME_UI_WIDTH/2;
-
 	int i; int j;
 
 	for (i = 0; i < GAME_TABLE_WIDTH; i++)
@@ -121,8 +147,8 @@ void engine_draw_board(struct game_board *board)
 		for (j = 0; j < GAME_TABLE_HEIGHT; j++)
 		{
 			change_color(board->cell[i][j].color);
-			mvaddch(center_top + j, center_left + 16 + (i*2),   ' ');
-			mvaddch(center_top + j, center_left + 16 + (i*2+1), ' ');
+			mvaddch(engine.center_top + j, engine.center_left + 16 + (i*2),   ' ');
+			mvaddch(engine.center_top + j, engine.center_left + 16 + (i*2+1), ' ');
 		}
 	}
 }

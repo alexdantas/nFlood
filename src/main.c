@@ -49,23 +49,54 @@ int main()
 		case 'r':
 			game_init(&board);
 			break;
+
 		case KEY_MOUSE:
 			if (getmouse(&event) != OK || !(event.bstate & BUTTON1_CLICKED))
 				break;
-			// 6 colors bar on top-left
-			if ((event.x >= 1 && (event.x - 1) / 2 < 6) && event.y == 1)
+
+			/* I know this is ugly, gotta find a formula for that */
+
+			/* Color bar on the left top */
+			if (event.y == engine.center_top)
 			{
+				if (event.x == (engine.center_left + 2 - 1) ||
+				    event.x == (engine.center_left + 2))
+					color = 1;
+				else if (event.x == (engine.center_left + 4) ||
+				         event.x == (engine.center_left + 4 + 1))
+					color = 2;
+				else if (event.x == (engine.center_left + 6 + 1) ||
+				         event.x == (engine.center_left + 6 + 2))
+					color = 3;
+				else if (event.x == (engine.center_left + 8 + 2) ||
+				         event.x == (engine.center_left + 8 + 3))
+					color = 4;
+
 				will_flood = 1;
-				color = (event.x + 1) / 2;
 			}
+
+			/* Color bar on the left bottom */
+			if (event.y == engine.center_top + 3)
+			{
+				if (event.x == (engine.center_left + 2 - 1) ||
+				    event.x == (engine.center_left + 2))
+					color = 5;
+				else if (event.x == (engine.center_left + 4) ||
+				         event.x == (engine.center_left + 4 + 1))
+					color = 6;
+
+				will_flood = 1;
+			}
+
 			// the main board
-			else if ((event.x >= 16 && event.x < 16 + GAME_TABLE_WIDTH * 2)
-			         &&	 (event.y >=  1 && event.y <  1 + GAME_TABLE_HEIGHT))
+			if ((event.x >= engine.center_left + 16 && event.x < engine.center_left + 16 + GAME_TABLE_WIDTH * 2) &&
+			    (event.y >= engine.center_top       && event.y <  engine.center_top + GAME_TABLE_HEIGHT))
 			{
 				will_flood = 1;
-				color = board.cell[(event.x - 16) / 2][event.y - 1].color;
+				color = board.cell[(event.x - (engine.center_left + 16)) / 2][event.y - engine.center_top].color;
 			}
 			break;
+
 		default:
 			break;
 		}

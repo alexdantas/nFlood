@@ -32,6 +32,8 @@ struct engine_t
 {
 	int width;
 	int height;
+	int center_top;  /**< y offset to center the game */
+	int center_left; /**< x offset to center the game */
 };
 
 /** Global `engine` data structure. */
