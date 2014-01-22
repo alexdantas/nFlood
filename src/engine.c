@@ -9,15 +9,18 @@ int engine_init()
 {
 	initscr();
 
+	/* Getting current width and height */
 	int current_height, current_width;
-	getmaxyx (stdscr, current_height, current_width);
+	getmaxyx(stdscr, current_height, current_width);
 
 	if ((current_width < GAME_WIDTH) || (current_height < GAME_HEIGHT))
 	{
 		// ABORT!
-		endwin ();
+		endwin();
 		return -1;
 	}
+	engine.width  = current_width;
+	engine.height = current_height;
 
 	if (has_colors() == TRUE)
 	{
@@ -71,14 +74,8 @@ void engine_exit()
 
 void engine_draw_ui(struct game_board *board, int hscore)
 {
-    /* Gets the current width and height
-     * FIXME: May be expensive to call this every frame
-     */
-	int width, height;
-    getmaxyx(stdscr, height, width);
-
-	int center_top  = height/2 - 5;
-	int center_left = width/2  - 30;
+	int center_top  = engine.height/2 - 5;
+	int center_left = engine.width/2  - 30;
 
 	if (!game_is_over(board))
 	{
@@ -114,14 +111,8 @@ void engine_draw_ui(struct game_board *board, int hscore)
 
 void engine_draw_board(struct game_board *board)
 {
-    /* Gets the current width and height
-     * FIXME: May be expensive to call this every frame
-     */
-	int width, height;
-    getmaxyx(stdscr, height, width);
-
-	int center_top  = height/2 - 5;
-	int center_left = width/2  - 30;
+	int center_top  = engine.height/2 - 5;
+	int center_left = engine.width/2  - 30;
 
 	int i; int j;
 

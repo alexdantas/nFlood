@@ -23,16 +23,30 @@
 
 #include "game.h"
 
+/** Contains global information about nCurses */
+struct engine_t
+{
+	int width;
+	int height;
+};
+
+/** Global `engine` data structure. */
+struct engine_t engine;
+
+/** Initializes nCurses */
 int engine_init();
 
-void engine_draw_board(struct game_board *board);
-
+/** Clears nCurses - must be called before quitting the game! */
 void engine_exit();
-
-void change_colo(int color);
 
 /** Draws the entire game board (with all those colored squares) */
 void engine_draw_ui(struct game_board *board, int hscore);
+
+/** Draws the colored `board` with the game. */
+void engine_draw_board(struct game_board *board);
+
+void change_color(int color);
+
 
 #endif /* ENGINE_H_DEFINED */
 
