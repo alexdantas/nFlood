@@ -5,52 +5,6 @@
 
 #define TEXT 10
 
-void engine_draw_ui(struct game_board *board, int hscore)
-{
-	int i;
-
-	if (!game_is_over(board))
-	{
-		for (i = 1; i <= 6; i++)
-		{
-			if (i == board->last_color)
-				continue;
-
-			change_color(i);
-			mvaddch(1, -1 + (2*i), ' ');
-
-			change_color(TEXT);
-			mvaddch(2, -1 + (2*i), ('1' + (i - 1)));
-		}
-
-		change_color(TEXT);
-		mvprintw(1, 13, "->");
-	}
-
-	change_color(TEXT);
-	mvprintw(5, 1, "r: New Game");
-	mvprintw(7, 1, "q: Quit");
-
-	mvprintw(12, 1, "Moves:   %d", board->moves);
-	mvprintw(13, 1, "Best:    %d", hscore);
-	mvprintw(14, 1, "Flooded: %.0f%%", (float)board->flood_count/(GAME_TABLE_WIDTH * GAME_TABLE_HEIGHT) * 100);
-}
-
-void engine_draw_board(struct game_board *board)
-{
-	int i; int j;
-
-	for (i = 0; i < GAME_TABLE_WIDTH; i++)
-	{
-		for (j = 0; j < GAME_TABLE_HEIGHT; j++)
-		{
-			change_color(board->cell[i][j].color);
-			mvaddch(1 + j, 16 + (i*2),   ' ');
-			mvaddch(1 + j, 16 + (i*2+1), ' ');
-		}
-	}
-}
-
 int engine_init()
 {
 	initscr();
@@ -113,6 +67,73 @@ void engine_exit()
 	erase();
 	refresh();
 	endwin();
+}
+
+void engine_draw_ui(struct game_board *board, int hscore)
+{
+    /* Gets the current width and height
+     * FIXME: May be expensive to call this every frame
+     */
+	int width, height;
+    getmaxyx(stdscr, height, width);
+
+	int center_top  = height/2 - 5;
+	int center_left = width/2  - 30;
+
+	if (!game_is_over(board))
+	{
+		int i;
+		for (i = 1; i <= 6; i++)
+		{
+			if (i == board->last_color)
+				continue;
+
+			change_color(i);
+			mvaddch(center_top,
+			        center_left - 1 + (2*i),
+			        ' ');
+
+			change_color(TEXT);
+			mvaddch(center_top + 1,
+			        center_left - 1 + (2*i),
+			        '1' + (i - 1));
+		}
+
+		change_color(TEXT);
+		mvprintw(center_top, center_left + 13, "->");
+	}
+
+	change_color(TEXT);
+	mvprintw(center_top + 5, center_left + 1, "r: New Game");
+	mvprintw(center_top + 7, center_left + 1, "q: Quit");
+
+	mvprintw(center_top + 11, center_left + 1, "Moves:   %d", board->moves);
+	mvprintw(center_top + 12, center_left + 1, "Best:    %d", hscore);
+	mvprintw(center_top + 13, center_left + 1, "Flooded: %.0f%%", (float)board->flood_count/(GAME_TABLE_WIDTH * GAME_TABLE_HEIGHT) * 100);
+}
+
+void engine_draw_board(struct game_board *board)
+{
+    /* Gets the current width and height
+     * FIXME: May be expensive to call this every frame
+     */
+	int width, height;
+    getmaxyx(stdscr, height, width);
+
+	int center_top  = height/2 - 5;
+	int center_left = width/2  - 30;
+
+	int i; int j;
+
+	for (i = 0; i < GAME_TABLE_WIDTH; i++)
+	{
+		for (j = 0; j < GAME_TABLE_HEIGHT; j++)
+		{
+			change_color(board->cell[i][j].color);
+			mvaddch(center_top + j, center_left + 16 + (i*2),   ' ');
+			mvaddch(center_top + j, center_left + 16 + (i*2+1), ' ');
+		}
+	}
 }
 
 void change_color(int color)
