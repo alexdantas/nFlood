@@ -8,21 +8,26 @@
 void engine_draw_ui(struct game_board *board, int hscore)
 {
 	int i;
-	for (i = 1; i <= 6; i++)
-	{
-		if (i == board->last_color)
-			continue;
 
-		change_color(i);
-		mvaddch(1, -1 + (2*i), ' ');
+	if (!game_is_over(board))
+	{
+		for (i = 1; i <= 6; i++)
+		{
+			if (i == board->last_color)
+				continue;
+
+			change_color(i);
+			mvaddch(1, -1 + (2*i), ' ');
+
+			change_color(TEXT);
+			mvaddch(2, -1 + (2*i), ('1' + (i - 1)));
+		}
 
 		change_color(TEXT);
-		mvaddch(2, -1 + (2*i), ('1' + (i - 1)));
+		mvprintw(1, 13, "->");
 	}
 
 	change_color(TEXT);
-	mvprintw(1, 13, "->");
-
 	mvprintw(5, 1, "r: New Game");
 	mvprintw(7, 1, "q: Quit");
 

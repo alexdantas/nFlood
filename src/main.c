@@ -66,6 +66,9 @@ int main()
 			break;
 		}
 
+		if (game_is_over(&board))
+			continue;
+
 		if (will_flood && board.last_color != color)
 		{
 			flood(&board, 0, 0, color);
