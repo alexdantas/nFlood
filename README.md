@@ -4,7 +4,7 @@ nFlood is a puzzle game just like [Flood-It](http://unixpapa.com/floodit/).
 
 It's played on the terminal, with text-based interface.
 
-# Usage
+## Usage
 
 Make sure you have `libncurses5-dev`.
 
@@ -13,12 +13,12 @@ Then, simply download (or `git clone` it) and `make` it
     $ make
     $ make run
 
-# Screenshots
+## Screenshots
 
 ![screen1](http://alexdantas.net/projects/nflood/images/game.png)
 ![screen2](http://alexdantas.net/projects/nflood/images/game2.png)
 
-# Controls
+## Controls
 
 | Keys          | Actions |
 | ------------- | ------- |
@@ -26,21 +26,12 @@ Then, simply download (or `git clone` it) and `make` it
 | q             | Quits the game at any time |
 | r             | Resets the game board |
 
-# Contact
+## Authors
 
-Hello, there! I'm Alexandre Dantas!
-You can send me comments, bugs, ideas or anything else by email.
-And if you have time, please visit my blog!
+* Copyright (C) 2011-2014  Alexandre Dantas <eu@alexdantas.net>
+* Copyright (C) 2014 Yu-Jie Lin <livibetter@gmail.com>
 
-* **email** eu@alexdantas.net
-* **homepage** http://alexdantas.net
-
-I'd appreciate any commentary - even if it's just "Hello, i play your game!".
-
-# License
-
- nFlood - Text-based puzzle game.
- Copyright (C) 2011-2014  Alexandre Dantas
+## License
 
  This is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by

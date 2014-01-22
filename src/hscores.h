@@ -1,7 +1,6 @@
 /* nFlood - Flood-it puzzle game on the terminal.
- * Copyright (C) 2011-2014  Alexandre Dantas (kure)
- *
- * This file is part of nFlood.
+ * Copyright (C) 2011-2014  Alexandre Dantas <eu@alexdantas.net>
+ * Copyright (C) 2014 Yu-Jie Lin <livibetter@gmail.com>
  *
  * nFlood is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
