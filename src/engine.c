@@ -141,3 +141,7 @@ void change_color(int color)
 		attron (COLOR_PAIR(color));
 }
 
+bool is_hit(int x, int y, int tx, int ty, int tw, int th)
+{
+	return x >= tx && x < tx + tw && y >= ty && y < ty + th;
+}

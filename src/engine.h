@@ -53,6 +53,7 @@ void engine_draw_board(struct game_board *board);
 
 void change_color(int color);
 
+bool is_hit(int x, int y, int tx, int ty, int tw, int th);
 
 #endif /* ENGINE_H_DEFINED */
 
