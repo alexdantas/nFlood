@@ -5,6 +5,7 @@
 
 #include <ncurses.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "engine.h"
 #include "game.h"
@@ -83,8 +84,32 @@ int main()
 				will_flood = 1;
 				color = board.cell[(event.x - (engine.center_left + 16)) / 2][event.y - engine.center_top].color;
 			}
-			break;
 
+			// menu
+			// FIXME should use some data structure with
+			// engine_draw_ui() without needing to use hard-coded
+			// position and text
+			if (is_hit(event.x,
+				   event.y,
+				   engine.center_left + 1,
+				   engine.center_top + 8,
+				   strlen("r: New Game"),
+				   1))
+			{
+				game_init(&board);
+			}
+			if (is_hit(event.x,
+				   event.y,
+				   engine.center_left + 1,
+				   engine.center_top + 9,
+				   strlen("q: Quit"),
+				   1))
+			{
+				engine_exit();
+				return 0;
+			}
+
+			break;
 		default:
 			break;
 		}
