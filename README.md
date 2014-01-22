@@ -1,5 +1,8 @@
 # nFlood
 
+    | |\ | | |_  | |   / / \ / / \ | | \
+    |_| \| |_|   |_|__ \_\_/ \_\_/ |_|_/
+
 nFlood is a simple clone of the *Flood-It* puzzle game.
 
 You need to fill the whole board with a single color.
@@ -33,6 +36,8 @@ Then, simply download (or `git clone` it) and `make` it
 | Numbers (1~6) | Changes the flood color |
 | q             | Quits the game at any time |
 | r             | Resets the game board |
+
+You can also use mouse to click on the board to flood it.
 
 ## Authors
 
