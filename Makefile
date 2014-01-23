@@ -65,7 +65,7 @@ INCLUDESDIR =
 LIBSDIR     =
 
 # All source files
-CFILES  = $(shell find src -maxdepth 1 -type f -name '*.c')
+CFILES  = $(shell find src -type f -name '*.c')
 OBJECTS = $(CFILES:.c=.o)
 
 DEFINES = -DVERSION=\""$(VERSION)"\" \

@@ -10,9 +10,12 @@
 #include "engine.h"
 #include "game.h"
 #include "hscores.h"
+#include "arguments.h"
 
-int main()
+int main(int argc, char* argv[])
 {
+	arguments_parse(argc, argv);
+
 	struct game_board board;
 	int hscore;
 
