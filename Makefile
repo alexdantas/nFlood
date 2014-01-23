@@ -48,13 +48,15 @@ EXEC_PREFIX = $(PREFIX)
 DATAROOTDIR = $(PREFIX)/share
 MANROOT     = $(DATAROOTDIR)/man
 
-MANNUMBER   = 6
+MANNUMBER = 6 # games
 
-BINDIR      = $(EXEC_PREFIX)/games
-MANDIR      = $(MANROOT)/man$(MANNUMBER)
+BINDIR = $(EXEC_PREFIX)/games
+MANDIR = $(MANROOT)/man$(MANNUMBER)
 
-MANFILE     = $(PACKAGE).$(MANNUMBER)
-MANPAGE     = doc/man/$(MANFILE)
+MANFILE = $(PACKAGE).$(MANNUMBER)
+MANPAGE = man/$(MANFILE)
+
+CONFIG_DIR = ~/.local/share/$(PACKAGE)
 
 # Build info
 EXE         = $(PACKAGE)
@@ -84,27 +86,17 @@ else
 MUTE = @
 endif
 
-ifdef DESTDIR
-ROOT = -
-else
-ROOT =
-endif
-
-ifdef DEBUG
-CDEBUG = -D_NFLOOD_DEBUG
-else
-CDEBUG =
-endif
-
 # Make targets
-all: dirs $(EXE)
+all: $(EXE)
 	# Build successful!
 
 install: all
 	# Installing...
 	$(MUTE)install -d -m 755 $(BINDIR)
 	$(MUTE)install -m 755 bin/$(EXE) $(BINDIR)
+
 	-$(MUTE)cat $(MANPAGE) | sed -e "s|DATE|$(DATE)|g" -e "s|VERSION|$(VERSION)|g" >$(MANFILE)
+
 	$(MUTE)install -d $(MANDIR)
 	$(MUTE)install $(MANFILE) $(MANDIR)
 	$(MUTE)rm -f $(MANFILE)
@@ -117,7 +109,7 @@ uninstall:
 
 purge: uninstall
 	# Purging configuration files...
-	$(MUTE)rm -f $(MANDIR)/$(MANFILE)
+	$(MUTE)rm -rf $(CONFIG_DIR)
 
 $(EXE): $(OBJECTS)
 	# Linking...
@@ -141,9 +133,6 @@ $(DISTDIR):
 	-$(MUTE)cp -r src/* $(DISTDIR)/src
 	-$(MUTE)cp -r doc/* $(DISTDIR)/doc
 
-dirs:
-	@-mkdir -p bin
-
 run: all
 	# Running...
 	$(MUTE)./bin/$(EXE)
@@ -161,6 +150,5 @@ docclean:
 	# Removing documentation...
 	-$(MUTE)rm $(VTAG) -rf doc/html
 
-.PHONY: clean doc docclean uninstall dirs
-
+.PHONY: clean doc docclean uninstall purge
 
