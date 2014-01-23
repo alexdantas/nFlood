@@ -34,7 +34,7 @@
 
 # General Info
 PACKAGE = nflood
-VERSION = 1.1
+VERSION = 0.5.0
 DATE    = $(shell date "+%b%Y")
 
 # Local source code information
