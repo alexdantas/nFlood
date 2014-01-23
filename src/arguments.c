@@ -20,7 +20,11 @@ void help(command_t* self)
 {
 	(void)(self);
 
-	printf("nFlood v"VERSION" (built "DATE")\n"
+	printf("            _______ __                __\n"
+	       "     .-----|    ___|  .-----.-----.--|  |\n"
+	       "     |     |    ___|  |  _  |  _  |  _  |\n"
+	       "     |__|__|___|   |__|_____|_____|_____|\n"
+	       "     v"VERSION"               (built "DATE")\n"
 	       "\n"
 	       "nFlood is a simple clone of the Flood-It puzzle game.\n"
 	       "\n"

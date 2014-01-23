@@ -1,9 +1,9 @@
-# nFlood
+           _______ __                __
+    .-----|    ___|  .-----.-----.--|  |
+    |     |    ___|  |  _  |  _  |  _  |
+    |__|__|___|   |__|_____|_____|_____|
 
-    | |\ | | |_  | |   / / \ / / \ | | \
-    |_| \| |_|   |_|__ \_\_/ \_\_/ |_|_/
-
-nFlood is a simple clone of the *Flood-It* puzzle game.
+*nFlood* is a simple clone of the *Flood-It* puzzle game.
 
 You need to fill the whole board with a single color.
 To do that, alternate between them, flooding with the
@@ -25,9 +25,9 @@ Then, simply download (or `git clone` it) and `make` it
 
 ## Screenshots
 
-![screen1](http://alexdantas.net/projects/nflood/images/game.png)
+![screen2](http://alexdantas.net/projects/nflood/images/game02.png)
 
-![screen2](http://alexdantas.net/projects/nflood/images/game2.png)
+![screen1](http://alexdantas.net/projects/nflood/images/game01.png)
 
 ## Controls
 
