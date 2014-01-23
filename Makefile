@@ -48,7 +48,8 @@ EXEC_PREFIX = $(PREFIX)
 DATAROOTDIR = $(PREFIX)/share
 MANROOT     = $(DATAROOTDIR)/man
 
-MANNUMBER = 6 # games
+# 6 for games
+MANNUMBER = 6
 
 BINDIR = $(EXEC_PREFIX)/games
 MANDIR = $(MANROOT)/man$(MANNUMBER)
