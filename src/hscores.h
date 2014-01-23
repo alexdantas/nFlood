@@ -21,33 +21,36 @@
 #ifndef HSCORES_DEFINED
 #define HSCORES_DEFINED
 
-/** HighScore of the game mode with borders */
-extern int HIGH_SCORE_BORDERS;
+#include <stdbool.h>
 
-/** HighScore of the game mode without borders */
-extern int HIGH_SCORE_BORDERS_OFF;
+/* Where we'll save the high scores,
+ * relative to user's home directory.
+ */
+#define SCORE_PATH ".local/share/nflood/"
+#define SCORE_FILE "nflood.scores"
 
-/** Restore the Highscores to the default.
- *
- *  @note If the Highscores file doesn't exist, it is created.
+#define HIGH_SCORE_DEFAULT 25;
+
+/**	Creates/opens the high score file, reading from it if existing.
+ *  @return false (0) if something weird happened, else true (1).
+ */
+bool hscore_init();
+
+/** Opens default high score file, returning a FILE* handle to it.
+ *  @note Remember to call `fclose()` later!
+ *  @return NULL if couldn't open the file.
+ */
+FILE* hscore_open(char* flags);
+
+/** Restores highscores file to default.
+ *  @note If file doesn't exist, creates it.
  */
 void hscore_clean();
 
-/**	Creates/reads from the High Score file
- *
- * 	First, we try to open for reading. If it doesn't exist, then we
- *  open it for writing, effectively creating it.
- *
- *  @note The path to the score file is defined by the Makefile.
- *        Currently, it is /var/games/.nsnake.scores
- *	@todo clean this code. Lots of useless ifs and elses.
- */
-int hscore_init();
+/**	Records the player high score at the file. */
+bool hscore_store(int hscore);
 
-/**	Records the player High Score
- */
-int hscore_store(int hscore);
-
+/** Returns the high score at the file. */
 int hscore_get();
 
 #endif /* HSCORES_H_DEFINED */

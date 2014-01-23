@@ -56,8 +56,6 @@ MANDIR      = $(MANROOT)/man$(MANNUMBER)
 MANFILE     = $(PACKAGE).$(MANNUMBER)
 MANPAGE     = doc/man/$(MANFILE)
 
-SCORE_FILE  = nflood.scores
-
 # Build info
 EXE         = $(PACKAGE)
 CDEBUG      = -O2
@@ -70,10 +68,9 @@ LIBSDIR     =
 CFILES  = $(shell find src -maxdepth 1 -type f -name '*.c')
 OBJECTS = $(CFILES:.c=.o)
 
-DEFINES = -DVERSION=\""$(VERSION)"\"         \
-          -DPACKAGE=\""$(PACKAGE)"\"         \
-          -DDATE=\""$(DATE)"\"               \
-          -DSCORE_FILE=\""$(SCORE_FILE)"\"
+DEFINES = -DVERSION=\""$(VERSION)"\" \
+          -DPACKAGE=\""$(PACKAGE)"\" \
+          -DDATE=\""$(DATE)"\"
 
 # Distribution tarball
 TARNAME = $(PACKAGE)
