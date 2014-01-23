@@ -50,6 +50,9 @@ int main(int argc, char* argv[])
 		case '4': will_flood = 1; color = YELLOW;  break;
 		case '5': will_flood = 1; color = GREEN;   break;
 		case '6': will_flood = 1; color = WHITE;   break;
+		case 'c':
+			engine_center_board(&board, hscore, !is_center(), TRUE);
+			break;
 		case 'r':
 			game_init(&board);
 			break;

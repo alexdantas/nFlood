@@ -27,6 +27,10 @@
 #define GAME_UI_WIDTH  44
 #define GAME_UI_HEIGHT 16
 
+/* Top-left corner when board is not centered */
+#define NOT_CENTER_TOP 1
+#define NOT_CENTER_LEFT 0
+
 /** Contains global information about nCurses */
 struct engine_t
 {
@@ -45,6 +49,12 @@ int engine_init();
 /** Clears nCurses - must be called before quitting the game! */
 void engine_exit();
 
+/** Set top-left corner of the board */
+int engine_set_center(bool center);
+
+/** Center the board or not */
+int engine_center_board(struct game_board *board, int score, bool center, bool redraw);
+
 /** Draws the entire game board (with all those colored squares) */
 void engine_draw_ui(struct game_board *board, int hscore);
 
@@ -52,6 +62,9 @@ void engine_draw_ui(struct game_board *board, int hscore);
 void engine_draw_board(struct game_board *board);
 
 void change_color(int color);
+
+/** Checks if board is at center */
+bool is_center();
 
 bool is_hit(int x, int y, int tx, int ty, int tw, int th);
 

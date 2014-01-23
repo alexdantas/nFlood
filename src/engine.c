@@ -9,21 +9,8 @@ int engine_init()
 {
 	initscr();
 
-	/* Getting current width and height */
-	int current_height, current_width;
-	getmaxyx(stdscr, current_height, current_width);
-
-	if ((current_width  < GAME_UI_WIDTH) ||
-	    (current_height < GAME_UI_HEIGHT))
-	{
-		endwin();
+	if (engine_set_center(TRUE))
 		return -1;
-	}
-	engine.width  = current_width;
-	engine.height = current_height;
-
-	engine.center_top  = engine.height/2 - GAME_UI_HEIGHT/2;
-	engine.center_left = engine.width/2  - GAME_UI_WIDTH/2;
 
 	if (has_colors() == TRUE)
 	{
@@ -73,6 +60,49 @@ void engine_exit()
 	erase();
 	refresh();
 	endwin();
+}
+
+int engine_set_center(bool center)
+{
+	if (!center)
+	{
+		engine.center_top = NOT_CENTER_TOP;
+		engine.center_left = NOT_CENTER_LEFT;
+		return 0;
+	}
+	
+	/* Getting current width and height */
+	int current_height, current_width;
+	getmaxyx(stdscr, current_height, current_width);
+
+	if ((current_width  < GAME_UI_WIDTH) ||
+		(current_height < GAME_UI_HEIGHT))
+	{
+		endwin();
+		return -1;
+	}
+	engine.width  = current_width;
+	engine.height = current_height;
+
+	engine.center_top  = engine.height/2 - GAME_UI_HEIGHT/2;
+	engine.center_left = engine.width/2  - GAME_UI_WIDTH/2;
+
+	return 0;
+}
+
+int engine_center_board(struct game_board *board, int hscore, bool center, bool redraw)
+{
+	if (engine_set_center(center))
+		return -1;
+
+	if (redraw)
+	{
+		erase();
+		engine_draw_ui(board, hscore);
+		engine_draw_board(board);
+	}
+
+	return 0;
 }
 
 void engine_draw_ui(struct game_board *board, int hscore)
@@ -139,6 +169,11 @@ void change_color(int color)
 {
 	if (has_colors () == TRUE)
 		attron (COLOR_PAIR(color));
+}
+
+bool is_center()
+{
+	return !(engine.center_top == NOT_CENTER_TOP && engine.center_left == NOT_CENTER_LEFT);
 }
 
 bool is_hit(int x, int y, int tx, int ty, int tw, int th)
