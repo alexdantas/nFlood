@@ -37,22 +37,30 @@ void help(command_t* self)
 	       "	nflood [options]\n"
 	       "\n"
 	       "	-h, --help     Show this message\n"
-	       "	-v, --version  Show game version and build date\n");
-	       "	-C, --uncenter Do not center the board\n"
+	       "	-v, --version  Show game version and build date\n"
+	       "	-c, --center   Center the game board at start\n");
 
 	command_free(self);
 	exit(EXIT_SUCCESS);
 }
 
-void uncenter(command_t* self)
+void center(command_t* self)
 {
 	(void)(self);
 
+	printf("a %p\n", &options.center);
+	options.center = true;
+}
+
+void options_init()
+{
 	options.center = false;
 }
 
 void arguments_parse(int argc, char* argv[])
 {
+	options_init();
+
 	/* commander internal data structure */
 	command_t cmd;
 	command_init(&cmd, argv[0], VERSION);
@@ -60,7 +68,8 @@ void arguments_parse(int argc, char* argv[])
 	command_option(&cmd, "-v", "--version", "Show game version and build date", version);
 	command_option(&cmd, "-h", "--help",    "Show instructions", help);
 
-	command_option(&cmd, "-C", "--uncenter", "Do not center the board", uncenter);
+	command_option(&cmd, "-c", "--center", "Center the game board at start", center);
+	printf("a %p\n", &options.center);
 
 	command_parse(&cmd, argc, argv);
 	command_free(&cmd);

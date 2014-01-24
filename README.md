@@ -29,7 +29,7 @@ Then, simply download (or `git clone` it) and `make` it
 | ------- | ------- |
 | `-h`, `--help`     | Shows help message |
 | `-v`, `--version`  | Shows game version and build date |
-| `-C`, `--uncenter` | Starts with uncentered board |
+| `-c`, `--center`   | Centers the game board |
 
 ## Screenshots
 

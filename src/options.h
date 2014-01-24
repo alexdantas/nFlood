@@ -23,14 +23,12 @@
 
 #include <stdbool.h>
 
-struct options_t {
-	bool center;
-} options_t;
-
-static struct options_t options =
+struct options_t
 {
-	.center = false
+	bool center;
 };
+
+struct options_t options;
 
 #endif /* OPTIONS_H_DEFINED */
 

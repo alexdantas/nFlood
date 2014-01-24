@@ -19,6 +19,7 @@ int main(int argc, char* argv[])
 
 	struct game_board board;
 	int hscore;
+	printf("m %p\n", &options.center);
 
 	if (engine_init() == -1)
 	{
