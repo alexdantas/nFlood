@@ -1,5 +1,4 @@
 
-#include <ncurses.h>
 #include "engine.h"
 #include "options.h"
 
@@ -9,6 +8,9 @@ int engine_init()
 
 	if (engine_set_center(TRUE))
 		return -1;
+
+	/* Default cell appearance - nice checkboard */
+	engine.cell_appearance = ACS_CKBOARD;
 
 	if (!color_init())
 	{
@@ -100,11 +102,11 @@ void engine_draw_ui(struct game_board *board, int hscore)
 
 			print_char(engine.center_left + 3*x + 1,
 			           engine.center_top + 3*y,
-			           ACS_CKBOARD,
+			           engine.cell_appearance,
 			           i);
 			print_char(engine.center_left + 3*x + 2,
 			           engine.center_top + 3*y,
-			           ACS_CKBOARD,
+			           engine.cell_appearance,
 			           i);
 
 			print_char(engine.center_left + 3*x + 1,
@@ -141,12 +143,12 @@ void engine_draw_board(struct game_board *board)
 		{
 			print_char(engine.center_left + 16 + (i*2),
 			           engine.center_top + j,
-			           ACS_CKBOARD,
+			           engine.cell_appearance,
 			           board->cell[i][j].color);
 
 			print_char(engine.center_left + 16 + (i*2 + 1),
 			           engine.center_top + j,
-			           ACS_CKBOARD,
+			           engine.cell_appearance,
 			           board->cell[i][j].color);
 		}
 	}

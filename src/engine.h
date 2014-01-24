@@ -21,6 +21,7 @@
 #ifndef ENGINE_H_DEFINED
 #define ENGINE_H_DEFINED
 
+#include <ncurses.h>
 #include "game.h"
 #include "color.h"
 
@@ -37,8 +38,9 @@ struct engine_t
 {
 	int width;
 	int height;
-	int center_top;  /**< y offset to center the game */
-	int center_left; /**< x offset to center the game */
+	int center_top;         /**< y offset to center the game */
+	int center_left;        /**< x offset to center the game */
+	chtype cell_appearance; /**< how we'll show game's cells */
 };
 
 /** Global `engine` data structure. */
