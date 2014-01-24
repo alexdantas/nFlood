@@ -4,6 +4,8 @@
 
 * Add high score file.
   It's now at `~/.local/share/nflood/nflood.scores`.
+* Add <kbd>c</kbd> key for toggling centering board.
+* Add `-C`, `--uncenter` for starting up without centering.
 
 ## Version 0.5.0 (2014-01-23)
 

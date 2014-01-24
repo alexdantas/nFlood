@@ -11,6 +11,7 @@
 #include "game.h"
 #include "hscores.h"
 #include "arguments.h"
+#include "options.h"
 
 int main(int argc, char* argv[])
 {
@@ -24,6 +25,7 @@ int main(int argc, char* argv[])
 		printf("ERROR: Failed to initialize nCurses");
 		return -1;
 	}
+	engine_set_center(options.center);
 
 	game_init(&board);
 

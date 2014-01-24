@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>				/* exit() */
 #include "arguments.h"
+#include "options.h"
 
 /* These are local functions that may be called
  * depending on the arguments passed by the user
@@ -37,11 +38,18 @@ void help(command_t* self)
 	       "\n"
 	       "	-h, --help     Show this message\n"
 	       "	-v, --version  Show game version and build date\n");
+	       "	-C, --uncenter Do not center the board\n"
 
 	command_free(self);
 	exit(EXIT_SUCCESS);
 }
 
+void uncenter(command_t* self)
+{
+	(void)(self);
+
+	options.center = false;
+}
 
 void arguments_parse(int argc, char* argv[])
 {
@@ -51,6 +59,8 @@ void arguments_parse(int argc, char* argv[])
 
 	command_option(&cmd, "-v", "--version", "Show game version and build date", version);
 	command_option(&cmd, "-h", "--help",    "Show instructions", help);
+
+	command_option(&cmd, "-C", "--uncenter", "Do not center the board", uncenter);
 
 	command_parse(&cmd, argc, argv);
 	command_free(&cmd);

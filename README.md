@@ -23,6 +23,14 @@ Then, simply download (or `git clone` it) and `make` it
     $ make
     $ make run
 
+## Options
+
+| Options | Actions |
+| ------- | ------- |
+| `-h`, `--help`     | Shows help message |
+| `-v`, `--version`  | Shows game version and build date |
+| `-C`, `--uncenter` | Starts with uncentered board |
+
 ## Screenshots
 
 ![screen2](http://alexdantas.net/projects/nflood/images/game02.png)
@@ -33,11 +41,11 @@ Then, simply download (or `git clone` it) and `make` it
 
 | Keys          | Actions |
 | ------------- | ------- |
+| Mouse Click   | Changes the flood color |
 | Numbers (1~6) | Changes the flood color |
 | q             | Quits the game at any time |
 | r             | Resets the game board |
-
-You can also use mouse to click on the board to flood it.
+| c             | Toggles centering the game board |
 
 ## Authors
 
