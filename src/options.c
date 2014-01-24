@@ -18,19 +18,11 @@
  * homepage: http://nflood.alexdantas.net
  */
 
-#ifndef OPTIONS_H_DEFINED
-#define OPTIONS_H_DEFINED
-
 #include <stdbool.h>
+#include "options.h"
 
-struct options_t
+void options_init()
 {
-	bool center;
-};
-
-struct options_t options;
-
-void options_init();
-
-#endif /* OPTIONS_H_DEFINED */
+	options.center = false;
+}
 

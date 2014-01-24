@@ -1,4 +1,5 @@
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>				/* exit() */
 #include "arguments.h"
@@ -48,19 +49,11 @@ void center(command_t* self)
 {
 	(void)(self);
 
-	printf("a %p\n", &options.center);
 	options.center = true;
-}
-
-void options_init()
-{
-	options.center = false;
 }
 
 void arguments_parse(int argc, char* argv[])
 {
-	options_init();
-
 	/* commander internal data structure */
 	command_t cmd;
 	command_init(&cmd, argv[0], VERSION);
@@ -69,7 +62,6 @@ void arguments_parse(int argc, char* argv[])
 	command_option(&cmd, "-h", "--help",    "Show instructions", help);
 
 	command_option(&cmd, "-c", "--center", "Center the game board at start", center);
-	printf("a %p\n", &options.center);
 
 	command_parse(&cmd, argc, argv);
 	command_free(&cmd);

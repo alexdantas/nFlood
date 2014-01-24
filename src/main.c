@@ -15,6 +15,7 @@
 
 int main(int argc, char* argv[])
 {
+	options_init();
 	arguments_parse(argc, argv);
 
 	struct game_board board;
