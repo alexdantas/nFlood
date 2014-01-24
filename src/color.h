@@ -36,5 +36,15 @@ color_t color_random();
  */
 color_t color_random_default();
 
+/** Changes how `color` appears on the screen.
+ *
+ *  @note You can only change the 8 default nCurses colors:
+ *        COLOR_BLACK, COLOR_RED, COLOR_GREEN, COLOR_YELLOW,
+ *        COLOR_BLUE, COLOR_MAGENTA, COLOR_CYAN and COLOR_WHITE.
+ *
+ *  @note `r`, `g` and `b` accept values from 0 to 1000.
+ */
+void color_customize(short color, short r, short g, short b);
+
 #endif /* COLOR_H_DEFINED */
 

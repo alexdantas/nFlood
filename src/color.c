@@ -86,4 +86,11 @@ color_t color_random_default()
 {
 	return random_int_between(BLACK_DEFAULT, WHITE_DEFAULT);
 }
+void color_customize(short color, short r, short g, short b)
+{
+	if (can_change_color() == FALSE)
+		return;
+
+	init_color(color, r, g, b);
+}
 
