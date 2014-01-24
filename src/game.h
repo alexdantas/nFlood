@@ -23,11 +23,6 @@
 
 #include <stdbool.h>
 
-enum cell_colors
-{
-	BLUE = 1, MAGENTA, RED, YELLOW, GREEN, WHITE
-};
-
 enum flooded_state
 {
 	BOARD_NOT_FLOODED, BOARD_FLOOD

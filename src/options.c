@@ -24,5 +24,6 @@
 void options_init()
 {
 	options.center = false;
+	options.colors = true;
 }
 

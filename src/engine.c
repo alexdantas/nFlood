@@ -1,9 +1,6 @@
 
-#include <ncurses.h>
-#include "game.h"
 #include "engine.h"
-
-#define TEXT 10
+#include "options.h"
 
 int engine_init()
 {
@@ -12,36 +9,17 @@ int engine_init()
 	if (engine_set_center(TRUE))
 		return -1;
 
-	if (has_colors() == TRUE)
-	{
-		int bg_color;
+	/* Default cell appearance - nice checkboard */
+	engine.cell_appearance = ACS_CKBOARD;
 
-		start_color();
-
-		// Let's try grabbing the current terminal background color
-		if (use_default_colors () == ERR)
-			bg_color = COLOR_BLACK;
-		else
-			bg_color = -1;
-/*
-  init_pair (BLUE,    COLOR_BLUE,    bg_color);
-  init_pair (MAGENTA, COLOR_MAGENTA, bg_color);
-  init_pair (WHITE,   COLOR_WHITE,   bg_color);
-  init_pair (RED,     COLOR_RED,     bg_color);
-  init_pair (GREEN,   COLOR_GREEN,   bg_color);
-  init_pair (YELLOW,  COLOR_YELLOW,  bg_color);
-*/
-		init_pair (TEXT,     COLOR_WHITE, bg_color);
-		init_pair (BLUE,    bg_color,  COLOR_BLUE);
-		init_pair (MAGENTA, bg_color,  COLOR_MAGENTA);
-		init_pair (WHITE,   bg_color,  COLOR_WHITE);
-		init_pair (RED,     bg_color,  COLOR_RED);
-		init_pair (GREEN,   bg_color,  COLOR_GREEN);
-		init_pair (YELLOW,  bg_color,  COLOR_YELLOW);
-	}
-	else
+	if (!color_init())
 	{
-		/* need to replace colors by blocks */
+		options.colors = false;
+
+		/* TODO replace colors by characters, as in:
+		 *      XXMM##XX
+		 *      XX####MM
+		 */
 	}
 
 	cbreak();
@@ -51,12 +29,15 @@ int engine_init()
 	refresh();
 
 	mousemask(BUTTON1_CLICKED, NULL);
-
+	color_customize(COLOR_MAGENTA, 0, 0, 1000);
 	return 0;
 }
 
 void engine_exit()
 {
+	if (options.colors)
+		color_exit();
+
 	erase();
 	refresh();
 	endwin();
@@ -70,13 +51,13 @@ int engine_set_center(bool center)
 		engine.center_left = NOT_CENTER_LEFT;
 		return 0;
 	}
-	
+
 	/* Getting current width and height */
 	int current_height, current_width;
 	getmaxyx(stdscr, current_height, current_width);
 
 	if ((current_width  < GAME_UI_WIDTH) ||
-		(current_height < GAME_UI_HEIGHT))
+	    (current_height < GAME_UI_HEIGHT))
 	{
 		endwin();
 		return -1;
@@ -109,41 +90,46 @@ void engine_draw_ui(struct game_board *board, int hscore)
 {
 	if (!game_is_over(board))
 	{
-                int i, x, y;
-                for (i = 1; i <= 6; i++)
-                {
-                        if (i == board->last_color)
-                                continue;
+		/* The problem with creating a hard-coded formula
+		 * is that it's tied to nCurses' internal color
+		 * values :(
+		 */
+		int i, x, y;
+		for (i = 1; i <= 6; i++)
+		{
+			if (i == board->last_color)
+				continue;
 
 			y = (i - 1)/4;
 			x = i - 1 - 4*y;
-                        change_color(i);
-                        mvaddstr(engine.center_top + 3*y,
-                                 engine.center_left + 3*x + 1,
-                                 "  ");
 
-                        change_color(TEXT);
-                        mvaddch(engine.center_top + 3*y + 1,
-                                engine.center_left + 3*x + 1,
-                                '1' + (i - 1));
-                }
+			print_char(engine.center_left + 3*x + 1,
+			           engine.center_top + 3*y,
+			           engine.cell_appearance,
+			           i);
+			print_char(engine.center_left + 3*x + 2,
+			           engine.center_top + 3*y,
+			           engine.cell_appearance,
+			           i);
 
-                change_color(TEXT);
-                mvprintw(engine.center_top, engine.center_left + 13, "->");
+			print_char(engine.center_left + 3*x + 1,
+			           engine.center_top + 3*y + 1,
+			           '1' + (i - 1),
+			           WHITE_DEFAULT);
+		}
+		print_string(engine.center_left + 13, engine.center_top, "->", WHITE_DEFAULT);
 	}
 	else
 	{
-                change_color(TEXT);
-                mvprintw(engine.center_top,     engine.center_left + 1, "Congrats!");
-                mvprintw(engine.center_top + 1, engine.center_left + 1, "one more game?");
+		change_color(WHITE_DEFAULT);
+		mvaddstr(engine.center_top,     engine.center_left + 1, "Congrats!");
+		mvaddstr(engine.center_top + 1, engine.center_left + 1, "one more game?");
 	}
 
-	change_color(TEXT);
+	print_string(engine.center_left + 1, engine.center_top + 6, "nFlood v" VERSION, WHITE_DEFAULT);
 
-	mvprintw(engine.center_top + 6, engine.center_left + 1, "nFlood v" VERSION);
-
-	mvprintw(engine.center_top + 8, engine.center_left + 1, "r: New Game");
-	mvprintw(engine.center_top + 9, engine.center_left + 1, "q: Quit");
+	print_string(engine.center_left + 1, engine.center_top + 8, "r: New Game", WHITE_DEFAULT);
+	print_string(engine.center_left + 1, engine.center_top + 9, "q: Quit", WHITE_DEFAULT);
 
 	mvprintw(engine.center_top + 11, engine.center_left + 1, "Moves:   %d", board->moves);
 	mvprintw(engine.center_top + 12, engine.center_left + 1, "Best:    %d", hscore);
@@ -158,17 +144,23 @@ void engine_draw_board(struct game_board *board)
 	{
 		for (j = 0; j < GAME_TABLE_HEIGHT; j++)
 		{
-			change_color(board->cell[i][j].color);
-			mvaddch(engine.center_top + j, engine.center_left + 16 + (i*2),   ' ');
-			mvaddch(engine.center_top + j, engine.center_left + 16 + (i*2+1), ' ');
+			print_char(engine.center_left + 16 + (i*2),
+			           engine.center_top + j,
+			           engine.cell_appearance,
+			           board->cell[i][j].color);
+
+			print_char(engine.center_left + 16 + (i*2 + 1),
+			           engine.center_top + j,
+			           engine.cell_appearance,
+			           board->cell[i][j].color);
 		}
 	}
 }
 
-void change_color(int color)
+void change_color(color_t color)
 {
-	if (has_colors () == TRUE)
-		attron (COLOR_PAIR(color));
+	if (options.colors)
+		attrset(COLOR_PAIR(color));
 }
 
 bool is_center()
@@ -180,3 +172,14 @@ bool is_hit(int x, int y, int tx, int ty, int tw, int th)
 {
 	return x >= tx && x < tx + tw && y >= ty && y < ty + th;
 }
+void print_char(int x, int y, const chtype c, color_t color)
+{
+	change_color(color);
+	mvaddch(y, x, c);
+}
+void print_string(int x, int y, char* str, color_t color)
+{
+	change_color(color);
+	mvaddstr(y, x, str);
+}
+

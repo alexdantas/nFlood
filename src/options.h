@@ -26,8 +26,11 @@
 struct options_t
 {
 	bool center;
-};
+	bool colors;
 
+} options_t;
+
+/** All global options from the game.  */
 struct options_t options;
 
 void options_init();
