@@ -3,6 +3,7 @@
 #include "game.h"
 #include "engine.h"
 #include "color.h"
+#include "options.h"
 
 int engine_init()
 {
@@ -13,6 +14,8 @@ int engine_init()
 
 	if (!color_init())
 	{
+		options.colors = false;
+
 		/* TODO replace colors by characters, as in:
 		 *      XXMM##XX
 		 *      XX####MM
@@ -149,7 +152,7 @@ void engine_draw_board(struct game_board *board)
 
 void change_color(int color)
 {
-	if (has_colors() == TRUE)
+	if (options.colors)
 		attron(COLOR_PAIR(color));
 }
 

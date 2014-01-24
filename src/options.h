@@ -23,13 +23,17 @@
 
 #include <stdbool.h>
 
-struct options_t {
+struct options_t
+{
 	bool center;
+	bool colors;
+
 } options_t;
 
 static struct options_t options =
 {
-	.center = false
+	.center = false,
+	.colors = true
 };
 
 #endif /* OPTIONS_H_DEFINED */
