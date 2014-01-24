@@ -47,12 +47,12 @@ int main(int argc, char* argv[])
 
 		switch (c)
 		{
-		case '1': will_flood = 1; color = BLUE_BLACK;    break;
-		case '2': will_flood = 1; color = MAGENTA_BLACK; break;
-		case '3': will_flood = 1; color = RED_BLACK;     break;
-		case '4': will_flood = 1; color = YELLOW_BLACK;  break;
-		case '5': will_flood = 1; color = GREEN_BLACK;   break;
-		case '6': will_flood = 1; color = WHITE_BLACK;   break;
+		case '1': will_flood = 1; color = BLUE_DEFAULT;    break;
+		case '2': will_flood = 1; color = MAGENTA_DEFAULT; break;
+		case '3': will_flood = 1; color = RED_DEFAULT;     break;
+		case '4': will_flood = 1; color = YELLOW_DEFAULT;  break;
+		case '5': will_flood = 1; color = GREEN_DEFAULT;   break;
+		case '6': will_flood = 1; color = WHITE_DEFAULT;   break;
 		case 'c':
 			engine_center_board(&board, hscore, !is_center(), TRUE);
 			break;

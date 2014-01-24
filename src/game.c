@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "game.h"
+#include "color.h"
 
 void game_init(struct game_board *board)
 {
@@ -13,7 +14,7 @@ void game_init(struct game_board *board)
 		for (j = 0; j < GAME_TABLE_HEIGHT; j++)
 		{
 			board->cell[i][j].flooded = 0;
-			board->cell[i][j].color = random_int_between(6, 1); //TODO magic numbers?
+			board->cell[i][j].color = color_random_default(); //TODO magic numbers?
 		}
 
 	board->flood_count = 0;
@@ -29,11 +30,6 @@ bool game_is_over(struct game_board *board)
 		return true;
 	else
 		return false;
-}
-
-int random_int_between (int upper, int lower)
-{
-	return rand() % (upper - lower + 1) + lower;
 }
 
 int flood (struct game_board *board, int x, int y, int color)

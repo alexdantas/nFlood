@@ -84,6 +84,10 @@ void engine_draw_ui(struct game_board *board, int hscore)
 {
 	if (!game_is_over(board))
 	{
+		/* The problem with creating a hard-coded formula
+		 * is that it's tied to nCurses' internal color
+		 * values :(
+		 */
 		int i, x, y;
 		for (i = 1; i <= 6; i++)
 		{
@@ -93,27 +97,30 @@ void engine_draw_ui(struct game_board *board, int hscore)
 			y = (i - 1)/4;
 			x = i - 1 - 4*y;
 			change_color(i);
-			mvaddstr(engine.center_top + 3*y,
-			         engine.center_left + 3*x + 1,
-			         "  ");
+			mvaddch(engine.center_top + 3*y,
+			        engine.center_left + 3*x + 1,
+			        ACS_CKBOARD);
+			mvaddch(engine.center_top + 3*y,
+			        engine.center_left + 3*x + 2,
+			        ACS_CKBOARD);
 
-			change_color(WHITE_BLACK);
+			change_color(WHITE_DEFAULT);
 			mvaddch(engine.center_top + 3*y + 1,
 			        engine.center_left + 3*x + 1,
 			        '1' + (i - 1));
 		}
 
-		change_color(WHITE_BLACK);
+		change_color(WHITE_DEFAULT);
 		mvprintw(engine.center_top, engine.center_left + 13, "->");
 	}
 	else
 	{
-		change_color(WHITE_BLACK);
+		change_color(WHITE_DEFAULT);
 		mvprintw(engine.center_top,     engine.center_left + 1, "Congrats!");
 		mvprintw(engine.center_top + 1, engine.center_left + 1, "one more game?");
 	}
 
-	change_color(WHITE_BLACK);
+	change_color(WHITE_DEFAULT);
 
 	mvprintw(engine.center_top + 6, engine.center_left + 1, "nFlood v" VERSION);
 
@@ -134,8 +141,8 @@ void engine_draw_board(struct game_board *board)
 		for (j = 0; j < GAME_TABLE_HEIGHT; j++)
 		{
 			change_color(board->cell[i][j].color);
-			mvaddch(engine.center_top + j, engine.center_left + 16 + (i*2),   ' ');
-			mvaddch(engine.center_top + j, engine.center_left + 16 + (i*2+1), ' ');
+			mvaddch(engine.center_top + j, engine.center_left + 16 + (i*2),   ACS_CKBOARD);
+			mvaddch(engine.center_top + j, engine.center_left + 16 + (i*2+1), ACS_CKBOARD);
 		}
 	}
 }
