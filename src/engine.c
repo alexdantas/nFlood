@@ -2,8 +2,7 @@
 #include <ncurses.h>
 #include "game.h"
 #include "engine.h"
-
-#define TEXT 10
+#include "color.h"
 
 int engine_init()
 {
@@ -12,36 +11,12 @@ int engine_init()
 	if (engine_set_center(TRUE))
 		return -1;
 
-	if (has_colors() == TRUE)
+	if (!color_init())
 	{
-		int bg_color;
-
-		start_color();
-
-		// Let's try grabbing the current terminal background color
-		if (use_default_colors () == ERR)
-			bg_color = COLOR_BLACK;
-		else
-			bg_color = -1;
-/*
-  init_pair (BLUE,    COLOR_BLUE,    bg_color);
-  init_pair (MAGENTA, COLOR_MAGENTA, bg_color);
-  init_pair (WHITE,   COLOR_WHITE,   bg_color);
-  init_pair (RED,     COLOR_RED,     bg_color);
-  init_pair (GREEN,   COLOR_GREEN,   bg_color);
-  init_pair (YELLOW,  COLOR_YELLOW,  bg_color);
-*/
-		init_pair (TEXT,     COLOR_WHITE, bg_color);
-		init_pair (BLUE,    bg_color,  COLOR_BLUE);
-		init_pair (MAGENTA, bg_color,  COLOR_MAGENTA);
-		init_pair (WHITE,   bg_color,  COLOR_WHITE);
-		init_pair (RED,     bg_color,  COLOR_RED);
-		init_pair (GREEN,   bg_color,  COLOR_GREEN);
-		init_pair (YELLOW,  bg_color,  COLOR_YELLOW);
-	}
-	else
-	{
-		/* need to replace colors by blocks */
+		/* TODO replace colors by characters, as in:
+		 *      XXMM##XX
+		 *      XX####MM
+		 */
 	}
 
 	cbreak();
@@ -70,13 +45,13 @@ int engine_set_center(bool center)
 		engine.center_left = NOT_CENTER_LEFT;
 		return 0;
 	}
-	
+
 	/* Getting current width and height */
 	int current_height, current_width;
 	getmaxyx(stdscr, current_height, current_width);
 
 	if ((current_width  < GAME_UI_WIDTH) ||
-		(current_height < GAME_UI_HEIGHT))
+	    (current_height < GAME_UI_HEIGHT))
 	{
 		endwin();
 		return -1;
@@ -109,36 +84,36 @@ void engine_draw_ui(struct game_board *board, int hscore)
 {
 	if (!game_is_over(board))
 	{
-                int i, x, y;
-                for (i = 1; i <= 6; i++)
-                {
-                        if (i == board->last_color)
-                                continue;
+		int i, x, y;
+		for (i = 1; i <= 6; i++)
+		{
+			if (i == board->last_color)
+				continue;
 
 			y = (i - 1)/4;
 			x = i - 1 - 4*y;
-                        change_color(i);
-                        mvaddstr(engine.center_top + 3*y,
-                                 engine.center_left + 3*x + 1,
-                                 "  ");
+			change_color(i);
+			mvaddstr(engine.center_top + 3*y,
+			         engine.center_left + 3*x + 1,
+			         "  ");
 
-                        change_color(TEXT);
-                        mvaddch(engine.center_top + 3*y + 1,
-                                engine.center_left + 3*x + 1,
-                                '1' + (i - 1));
-                }
+			change_color(WHITE_BLACK);
+			mvaddch(engine.center_top + 3*y + 1,
+			        engine.center_left + 3*x + 1,
+			        '1' + (i - 1));
+		}
 
-                change_color(TEXT);
-                mvprintw(engine.center_top, engine.center_left + 13, "->");
+		change_color(WHITE_BLACK);
+		mvprintw(engine.center_top, engine.center_left + 13, "->");
 	}
 	else
 	{
-                change_color(TEXT);
-                mvprintw(engine.center_top,     engine.center_left + 1, "Congrats!");
-                mvprintw(engine.center_top + 1, engine.center_left + 1, "one more game?");
+		change_color(WHITE_BLACK);
+		mvprintw(engine.center_top,     engine.center_left + 1, "Congrats!");
+		mvprintw(engine.center_top + 1, engine.center_left + 1, "one more game?");
 	}
 
-	change_color(TEXT);
+	change_color(WHITE_BLACK);
 
 	mvprintw(engine.center_top + 6, engine.center_left + 1, "nFlood v" VERSION);
 
@@ -167,8 +142,8 @@ void engine_draw_board(struct game_board *board)
 
 void change_color(int color)
 {
-	if (has_colors () == TRUE)
-		attron (COLOR_PAIR(color));
+	if (has_colors() == TRUE)
+		attron(COLOR_PAIR(color));
 }
 
 bool is_center()

@@ -12,6 +12,7 @@
 #include "hscores.h"
 #include "arguments.h"
 #include "options.h"
+#include "color.h"
 
 int main(int argc, char* argv[])
 {
@@ -46,12 +47,12 @@ int main(int argc, char* argv[])
 
 		switch (c)
 		{
-		case '1': will_flood = 1; color = BLUE;    break;
-		case '2': will_flood = 1; color = MAGENTA; break;
-		case '3': will_flood = 1; color = RED;     break;
-		case '4': will_flood = 1; color = YELLOW;  break;
-		case '5': will_flood = 1; color = GREEN;   break;
-		case '6': will_flood = 1; color = WHITE;   break;
+		case '1': will_flood = 1; color = BLUE_BLACK;    break;
+		case '2': will_flood = 1; color = MAGENTA_BLACK; break;
+		case '3': will_flood = 1; color = RED_BLACK;     break;
+		case '4': will_flood = 1; color = YELLOW_BLACK;  break;
+		case '5': will_flood = 1; color = GREEN_BLACK;   break;
+		case '6': will_flood = 1; color = WHITE_BLACK;   break;
 		case 'c':
 			engine_center_board(&board, hscore, !is_center(), TRUE);
 			break;
