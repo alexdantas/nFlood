@@ -22,6 +22,7 @@
 #define ENGINE_H_DEFINED
 
 #include "game.h"
+#include "color.h"
 
 /* Pre-defined sizes of the User Interface (including the `board`)*/
 #define GAME_UI_WIDTH  44
@@ -61,12 +62,19 @@ void engine_draw_ui(struct game_board *board, int hscore);
 /** Draws the colored `board` with the game. */
 void engine_draw_board(struct game_board *board);
 
-void change_color(int color);
+/** Changes `color` so things we show on the screen will have it. */
+void change_color(color_t color);
 
 /** Checks if board is at center */
 bool is_center();
 
 bool is_hit(int x, int y, int tx, int ty, int tw, int th);
+
+/** Shows char `c` on `x`/`y` with `color`. */
+void print_char(int x, int y, const chtype c, color_t color);
+
+/** Shows `str` on `x`/`y` with `color`. */
+void print_string(int x, int y, char* str, color_t color);
 
 #endif /* ENGINE_H_DEFINED */
 

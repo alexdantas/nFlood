@@ -1,8 +1,6 @@
 
 #include <ncurses.h>
-#include "game.h"
 #include "engine.h"
-#include "color.h"
 #include "options.h"
 
 int engine_init()
@@ -99,36 +97,34 @@ void engine_draw_ui(struct game_board *board, int hscore)
 
 			y = (i - 1)/4;
 			x = i - 1 - 4*y;
-			change_color(i);
-			mvaddch(engine.center_top + 3*y,
-			        engine.center_left + 3*x + 1,
-			        ACS_CKBOARD);
-			mvaddch(engine.center_top + 3*y,
-			        engine.center_left + 3*x + 2,
-			        ACS_CKBOARD);
 
-			change_color(WHITE_DEFAULT);
-			mvaddch(engine.center_top + 3*y + 1,
-			        engine.center_left + 3*x + 1,
-			        '1' + (i - 1));
+			print_char(engine.center_left + 3*x + 1,
+			           engine.center_top + 3*y,
+			           ACS_CKBOARD,
+			           i);
+			print_char(engine.center_left + 3*x + 2,
+			           engine.center_top + 3*y,
+			           ACS_CKBOARD,
+			           i);
+
+			print_char(engine.center_left + 3*x + 1,
+			           engine.center_top + 3*y + 1,
+			           '1' + (i - 1),
+			           WHITE_DEFAULT);
 		}
-
-		change_color(WHITE_DEFAULT);
-		mvprintw(engine.center_top, engine.center_left + 13, "->");
+		print_string(engine.center_left + 13, engine.center_top, "->", WHITE_DEFAULT);
 	}
 	else
 	{
 		change_color(WHITE_DEFAULT);
-		mvprintw(engine.center_top,     engine.center_left + 1, "Congrats!");
-		mvprintw(engine.center_top + 1, engine.center_left + 1, "one more game?");
+		mvaddstr(engine.center_top,     engine.center_left + 1, "Congrats!");
+		mvaddstr(engine.center_top + 1, engine.center_left + 1, "one more game?");
 	}
 
-	change_color(WHITE_DEFAULT);
+	print_string(engine.center_left + 1, engine.center_top + 6, "nFlood v" VERSION, WHITE_DEFAULT);
 
-	mvprintw(engine.center_top + 6, engine.center_left + 1, "nFlood v" VERSION);
-
-	mvprintw(engine.center_top + 8, engine.center_left + 1, "r: New Game");
-	mvprintw(engine.center_top + 9, engine.center_left + 1, "q: Quit");
+	print_string(engine.center_left + 1, engine.center_top + 8, "r: New Game", WHITE_DEFAULT);
+	print_string(engine.center_left + 1, engine.center_top + 9, "q: Quit", WHITE_DEFAULT);
 
 	mvprintw(engine.center_top + 11, engine.center_left + 1, "Moves:   %d", board->moves);
 	mvprintw(engine.center_top + 12, engine.center_left + 1, "Best:    %d", hscore);
@@ -143,17 +139,23 @@ void engine_draw_board(struct game_board *board)
 	{
 		for (j = 0; j < GAME_TABLE_HEIGHT; j++)
 		{
-			change_color(board->cell[i][j].color);
-			mvaddch(engine.center_top + j, engine.center_left + 16 + (i*2),   ACS_CKBOARD);
-			mvaddch(engine.center_top + j, engine.center_left + 16 + (i*2+1), ACS_CKBOARD);
+			print_char(engine.center_left + 16 + (i*2),
+			           engine.center_top + j,
+			           ACS_CKBOARD,
+			           board->cell[i][j].color);
+
+			print_char(engine.center_left + 16 + (i*2 + 1),
+			           engine.center_top + j,
+			           ACS_CKBOARD,
+			           board->cell[i][j].color);
 		}
 	}
 }
 
-void change_color(int color)
+void change_color(color_t color)
 {
 	if (options.colors)
-		attron(COLOR_PAIR(color));
+		attrset(COLOR_PAIR(color));
 }
 
 bool is_center()
@@ -165,3 +167,14 @@ bool is_hit(int x, int y, int tx, int ty, int tw, int th)
 {
 	return x >= tx && x < tx + tw && y >= ty && y < ty + th;
 }
+void print_char(int x, int y, const chtype c, color_t color)
+{
+	change_color(color);
+	mvaddch(y, x, c);
+}
+void print_string(int x, int y, char* str, color_t color)
+{
+	change_color(color);
+	mvaddstr(y, x, str);
+}
+
