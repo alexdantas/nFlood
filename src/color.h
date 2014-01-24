@@ -26,6 +26,11 @@ typedef enum
  */
 bool color_init();
 
+/** Restores color support.
+ *  @note Need to be called before quitting the program!
+ */
+void color_exit();
+
 /** Returns a random color within all 64 possible color pairs.
  *  @note Doesn't include default background
  */

@@ -2,6 +2,21 @@
 #include "color.h"
 #include "utils.h"
 
+/* A stange thing I found was that when calling `color_customize`,
+ * it changes the colors from ALL open ncurses programs on the
+ * machine!
+ *
+ * So we need to get previous values and reset after finishing up.
+ * These are the default values we'll restore to later:
+ */
+
+struct default_vals
+{
+	short r, g, b;
+};
+struct default_vals default_colors[8];
+
+
 bool color_init()
 {
 	if (has_colors() != TRUE)	/* ncurses BOOL */
@@ -74,7 +89,38 @@ bool color_init()
 		init_pair(CYAN_DEFAULT,     COLOR_CYAN,    COLOR_BLACK);
 		init_pair(WHITE_DEFAULT,    COLOR_WHITE,   COLOR_BLACK);
 	}
+
+	/* Finally, saving current color definitions.
+	 * See the comment right on the beginning
+	 * of this file.
+	 */
+	for (i = COLOR_BLACK; i < COLOR_WHITE; i++)
+	{
+		short r, g, b;
+		color_content(i, &r, &g, &b);
+
+		default_colors[i].r = r;
+		default_colors[i].g = g;
+		default_colors[i].b = b;
+	}
+
 	return true;
+}
+
+void color_exit()
+{
+	/* Restoring default color definitions.
+	 * See the comment right on the beginning
+	 * of this file.
+	 */
+	int i;
+	for (i = COLOR_BLACK; i < COLOR_WHITE; i++)
+	{
+		color_customize(i,
+		                default_colors[i].r,
+		                default_colors[i].g,
+		                default_colors[i].b);
+	}
 }
 
 color_t color_random()

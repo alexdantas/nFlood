@@ -29,12 +29,15 @@ int engine_init()
 	refresh();
 
 	mousemask(BUTTON1_CLICKED, NULL);
-
+	color_customize(COLOR_MAGENTA, 0, 0, 1000);
 	return 0;
 }
 
 void engine_exit()
 {
+	if (options.colors)
+		color_exit();
+
 	erase();
 	refresh();
 	endwin();
