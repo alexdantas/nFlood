@@ -1,25 +1,38 @@
+/* nFlood - Flood-it puzzle game on the terminal.
+ * Copyright (C) 2011-2014  Alexandre Dantas <eu@alexdantas.net>
+ * Copyright (C) 2014 Yu-Jie Lin <livibetter@gmail.com>
+ *
+ * nFlood is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * homepage: http://nflood.alexdantas.net
+ */
+
 #ifndef COLOR_H_DEFINED
 #define COLOR_H_DEFINED
 
-/** Possible engine color pairs (FOREGROUND_BACKGROUND).
- *  This defines all possible combinations of color pairs
- *  on ncurses.
- *  Note that the order of definition is important,
- *  also the intial value of 1.
+/** This file handles all color schemes of nCurses.
+ *
+ *  Basically, <INSERT EXPLANATION HERE>
+ *
+ * @note COLORS is nCurses' alias for the maximum number of
+ *       currently supported colors.
+ *       For old terminals that's 8 and for modern ones is 256.
  *
  */
-typedef enum
-{
-	BLACK_BLACK = 1, BLACK_RED,   BLACK_GREEN,   BLACK_YELLOW,   BLACK_BLUE,   BLACK_MAGENTA,   BLACK_CYAN,   BLACK_WHITE,
-	RED_BLACK,       RED_RED,     RED_GREEN,     RED_YELLOW,     RED_BLUE,     RED_MAGENTA,     RED_CYAN,     RED_WHITE,
-	GREEN_BLACK,     GREEN_RED,   GREEN_GREEN,   GREEN_YELLOW,   GREEN_BLUE,   GREEN_MAGENTA,   GREEN_CYAN,   GREEN_WHITE,
-	YELLOW_BLACK,    YELLOW_RED,  YELLOW_GREEN,  YELLOW_YELLOW,  YELLOW_BLUE,  YELLOW_MAGENTA,  YELLOW_CYAN,  YELLOW_WHITE,
-	BLUE_BLACK,      BLUE_RED,    BLUE_GREEN,    BLUE_YELLOW,    BLUE_BLUE,    BLUE_MAGENTA,    BLUE_CYAN,    BLUE_WHITE,
-	MAGENTA_BLACK,   MAGENTA_RED, MAGENTA_GREEN, MAGENTA_YELLOW, MAGENTA_BLUE, MAGENTA_MAGENTA, MAGENTA_CYAN, MAGENTA_WHITE,
-	CYAN_BLACK,      CYAN_RED,    CYAN_GREEN,    CYAN_YELLOW,    CYAN_BLUE,    CYAN_MAGENTA,    CYAN_CYAN,    CYAN_WHITE,
-	WHITE_BLACK,     WHITE_RED,   WHITE_GREEN,   WHITE_YELLOW,   WHITE_BLUE,   WHITE_MAGENTA,   WHITE_CYAN,   WHITE_WHITE,
-	BLACK_DEFAULT,   RED_DEFAULT, GREEN_DEFAULT, YELLOW_DEFAULT, BLUE_DEFAULT, MAGENTA_DEFAULT, CYAN_DEFAULT, WHITE_DEFAULT
-} color_t;
+
+/** So people don't get confused  */
+typedef int color_t;
 
 /** Initializes color support and all color pairs.
  *  @return false (0) if something weird happened, else true (1).
@@ -50,6 +63,47 @@ color_t color_random_default();
  *  @note `r`, `g` and `b` accept values from 0 to 1000.
  */
 void color_customize(short color, short r, short g, short b);
+
+/** Changes how `color` appears on screen based on `hex` string.
+ *
+ *  @note Same notes as `color_customize` apply.
+ *
+ *  @note The format accepted or `hex` is "#RRGGBB".
+ *        RR, GG and BB are hex values to red, green and blue.
+ *
+ *  @bug If the format string is invalid, won't do anything.
+ */
+void color_customize_hex(short color, char* hex);
+
+/** Returns the color pair for `foreground` and `background`.
+ *
+ *  The value returned is only useful for `color_change_pair`.
+ *
+ *  @note `foreground` and `background` are internal vaues.
+ *        To see them, check the comment at the beginning
+ *        of this module.
+ */
+color_t color_pair(short foreground, short background);
+
+/** Returns the color pair for strings `foreground`
+ *  and `background`.
+ *
+ *  @note Currently accepted values are
+ *        the same as `color_from_string`.
+ */
+color_t color_pair_from_string(char* foreground, char* background);
+
+/** Returns a internal color value from string `str`.
+ *
+ *  @note Currently accepted values are the most simple colors:
+ *        "black", "red", "green", "yellow",
+ *        "blue", "magenta", "cyan", "white" and
+ *        "default" (for user terminal's default).
+ *
+ *  @note You'll probably use the returned value on
+ *        `color_pair`.
+ */
+short color_from_string(char* str);
 
 #endif /* COLOR_H_DEFINED */
 

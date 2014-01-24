@@ -1,4 +1,5 @@
 #include "utils.h"
+#include <stdlib.h>
 
 int random_int_between (int upper, int lower)
 {
