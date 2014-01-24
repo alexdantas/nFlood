@@ -1,9 +1,10 @@
-
-//
-// commander.h
-//
-// Copyright (c) 2012 TJ Holowaychuk <tj@vision-media.ca>
-//
+/* commander.c - Commander option parser ported to C.
+ * http://github.com/clibs/commander
+ *
+ * Copyright (c) 2012 TJ Holowaychuk <tj@vision-media.ca>
+ *
+ * Slightly modified so it could fit nFlood.
+ */
 
 #ifndef COMMANDER_H
 #define COMMANDER_H
@@ -68,20 +69,20 @@ typedef struct command {
   char **nargv;
 } command_t;
 
-// prototypes
 
+/** Initialize with program `name` and `version`. */
 void
 command_init(command_t *self, const char *name, const char *version);
 
+/** Free up commander after use. */
 void
 command_free(command_t *self);
 
-void
-command_help(command_t *self);
-
+/** Define an option. */
 void
 command_option(command_t *self, const char *small, const char *large, const char *desc, command_callback_t cb);
 
+/** Parse `argv` (public). */
 void
 command_parse(command_t *self, int argc, char **argv);
 

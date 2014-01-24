@@ -1,9 +1,10 @@
-
-//
-// commander.c
-//
-// Copyright (c) 2012 TJ Holowaychuk <tj@vision-media.ca>
-//
+/* commander.c - Commander option parser ported to C.
+ * http://github.com/clibs/commander
+ *
+ * Copyright (c) 2012 TJ Holowaychuk <tj@vision-media.ca>
+ *
+ * Slightly modified so it could fit nFlood.
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,56 +12,12 @@
 #include <assert.h>
 #include "commander.h"
 
-/*
- * Output error and exit.
- */
-
+/** Output error and exit. */
 static void
 error(char *msg) {
   fprintf(stderr, "%s\n", msg);
   exit(1);
 }
-
-/*
- * Output command version.
- */
-
-static void
-command_version(command_t *self) {
-  printf("%s\n", self->version);
-  command_free(self);
-  exit(0);
-}
-
-/*
- * Output command help.
- */
-
-void
-command_help(command_t *self) {
-  printf("\n");
-  printf("  Usage: %s %s\n", self->name, self->usage);
-  printf("\n");
-  printf("  Options:\n");
-  printf("\n");
-
-  int i;
-  for (i = 0; i < self->option_count; ++i) {
-    command_option_t *option = &self->options[i];
-    printf("    %s, %-25s %s\n"
-      , option->small
-      , option->large_with_arg
-      , option->description);
-  }
-
-  printf("\n");
-  command_free(self);
-  exit(0);
-}
-
-/*
- * Initialize with program `name` and `version`.
- */
 
 void
 command_init(command_t *self, const char *name, const char *version) {
@@ -71,10 +28,6 @@ command_init(command_t *self, const char *name, const char *version) {
   self->usage = "[options]";
   self->nargv = NULL;
 }
-
-/*
- * Free up commander after use.
- */
 
 void
 command_free(command_t *self) {
@@ -94,8 +47,8 @@ command_free(command_t *self) {
   }
 }
 
-/*
- * Parse argname from `str`. For example
+/** Parse argname from `str`.
+ * For example:
  * Take "--required <arg>" and populate `flag`
  * with "--required" and `arg` with "<arg>".
  */
@@ -122,10 +75,10 @@ parse_argname(const char *str, char *flag, char *arg) {
   flag[flagpos] = '\0';
 }
 
-/*
- * Normalize the argument vector by exploding
- * multiple options (if any). For example
- * "foo -abc --scm git" -> "foo -a -b -c --scm git"
+/** Normalize the argument vector by exploding
+ *  multiple options (if any).
+ *  For example
+ *  "foo -abc --scm git" -> "foo -a -b -c --scm git"
  */
 
 static char **
@@ -163,10 +116,6 @@ normalize_args(int *argc, char **argv) {
   return nargv;
 }
 
-/*
- * Define an option.
- */
-
 void
 command_option(command_t *self, const char *small, const char *large, const char *desc, command_callback_t cb) {
   if (self->option_count == COMMANDER_MAX_OPTIONS) {
@@ -189,10 +138,9 @@ command_option(command_t *self, const char *small, const char *large, const char
   if ('<' == option->argname[0]) option->required_arg = 1;
 }
 
-/*
- * Parse `argv` (internal).
- * Input arguments should be normalized first
- * see `normalize_args`.
+/** Parse `argv` (internal).
+ *  Input arguments should be normalized first
+ *  see `normalize_args`.
  */
 
 static void
@@ -255,10 +203,6 @@ command_parse_args(command_t *self, int argc, char **argv) {
     match:;
   }
 }
-
-/*
- * Parse `argv` (public).
- */
 
 void
 command_parse(command_t *self, int argc, char **argv) {
