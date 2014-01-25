@@ -91,6 +91,14 @@ endif
 all: $(EXE)
 	# Build successful!
 
+$(EXE): $(OBJECTS)
+	# Linking...
+	$(MUTE)$(CC) $(OBJECTS) -o bin/$(EXE) $(LIBSDIR) $(LDFLAGS)
+
+src/%.o: src/%.c
+	# Compiling $<...
+	$(MUTE)$(CC) $(CFLAGS) $(CDEBUG) $< -c -o $@ $(DEFINES) $(INCLUDESDIR)
+
 install: all
 	# Installing...
 	$(MUTE)install -d -m 755 $(BINDIR)
@@ -111,14 +119,6 @@ uninstall:
 purge: uninstall
 	# Purging configuration files...
 	$(MUTE)rm -rf $(CONFIG_DIR)
-
-$(EXE): $(OBJECTS)
-	# Linking...
-	$(MUTE)$(CC) $(OBJECTS) -o bin/$(EXE) $(LIBSDIR) $(LDFLAGS)
-
-src/%.o: src/%.c
-	# Compiling $<...
-	$(MUTE)$(CC) $(CFLAGS) $(CDEBUG) $< -c -o $@ $(DEFINES) $(INCLUDESDIR)
 
 dist: clean $(DISTDIR).tar.gz
 

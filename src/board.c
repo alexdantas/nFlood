@@ -1,4 +1,7 @@
+#include <stdlib.h>
 #include "board.h"
+#include "utils.h"
+#include "engine.h"
 
 struct game_board_t* board_new(unsigned int width, unsigned int height)
 {
@@ -64,6 +67,8 @@ void board_free(struct game_board_t* board)
 
 int flood(struct game_board_t *board, int x, int y, color_pair_t pair)
 {
+	if (!board) return 1;
+
 	if ((x >= (int)board->width) ||
 	    (y >= (int)board->height))
 		return 1;
@@ -76,6 +81,7 @@ int flood(struct game_board_t *board, int x, int y, color_pair_t pair)
 	{
 		if (board->cell[x][y].color != pair)
 		{
+			/* Woops! Something bad happened here! */
 			board->cell[x][y].color = pair;
 		}
 		else
