@@ -28,6 +28,9 @@ struct options_t
 	bool center;
 	bool colors;
 
+	int game_width;
+	int game_height;
+
 } options_t;
 
 /** All global options from the game.  */

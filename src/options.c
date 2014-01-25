@@ -23,7 +23,9 @@
 
 void options_init()
 {
-	options.center = false;
-	options.colors = true;
+	options.center      = false;
+	options.colors      = true;
+	options.game_width  = 14;
+	options.game_height = 14;
 }
 

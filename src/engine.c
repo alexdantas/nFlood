@@ -32,13 +32,13 @@ int engine_init()
 	engine.text      = color_pair_from_string("white",   "default");
 	engine.hilite    = color_pair_from_string("red",     "default");
 
-	cbreak();
-	curs_set(0);
-	noecho();
-	keypad(stdscr, TRUE);
-	refresh();
+	cbreak();					/* get keys without pressing enter */
+	curs_set(0);				/* hiding blinking cursor */
+	noecho();					/* don't echo the keys pressed */
+	keypad(stdscr, TRUE);		/* accept extra keys (F1, etc) */
 
-	mousemask(BUTTON1_CLICKED, NULL);
+	mousemask(BUTTON1_CLICKED, NULL); /* mouse support */
+	refresh();
 	return 0;
 }
 
@@ -77,7 +77,7 @@ bool engine_set_center(bool center)
 	return true;
 }
 
-int engine_center_board(struct game_board *board, int hscore, bool center, bool redraw)
+int engine_center_board(struct game_board_t *board, int hscore, bool center, bool redraw)
 {
 	if (engine_set_center(center))
 		return -1;
@@ -92,7 +92,7 @@ int engine_center_board(struct game_board *board, int hscore, bool center, bool 
 	return 0;
 }
 
-void engine_draw_ui(struct game_board *board, int hscore)
+void engine_draw_ui(struct game_board_t *board, int hscore)
 {
 	if (!game_is_over(board))
 	{
@@ -140,16 +140,20 @@ void engine_draw_ui(struct game_board *board, int hscore)
 
 	mvprintw(engine.center_top + 11, engine.center_left + 1, "Moves:   %d", board->moves);
 	mvprintw(engine.center_top + 12, engine.center_left + 1, "Best:    %d", hscore);
-	mvprintw(engine.center_top + 13, engine.center_left + 1, "Flooded: %.0f%%", (float)board->flood_count/(GAME_TABLE_WIDTH * GAME_TABLE_HEIGHT) * 100);
+
+	float percent = board->flood_count/(board->width * board->height) * 100;
+	mvprintw(engine.center_top + 13, engine.center_left + 1, "Flooded: %.0f%%", percent);
+
+//	refresh();
 }
 
-void engine_draw_board(struct game_board *board)
+void engine_draw_board(struct game_board_t *board)
 {
-	int i; int j;
+	unsigned int i, j;
 
-	for (i = 0; i < GAME_TABLE_WIDTH; i++)
+	for (i = 0; i < (board->width); i++)
 	{
-		for (j = 0; j < GAME_TABLE_HEIGHT; j++)
+		for (j = 0; j < (board->height); j++)
 		{
 			print_char(engine.center_left + 16 + (i*2),
 			           engine.center_top + j,
@@ -162,10 +166,12 @@ void engine_draw_board(struct game_board *board)
 			           board->cell[i][j].color);
 		}
 	}
+//	refresh();
 }
 bool is_center()
 {
-	return !(engine.center_top == NOT_CENTER_TOP && engine.center_left == NOT_CENTER_LEFT);
+	return !(engine.center_top  == NOT_CENTER_TOP &&
+	         engine.center_left == NOT_CENTER_LEFT);
 }
 
 bool is_hit(int x, int y, int tx, int ty, int tw, int th)

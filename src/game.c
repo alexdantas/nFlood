@@ -5,42 +5,83 @@
 #include "color.h"
 #include "engine.h"
 
-void game_init(struct game_board *board)
+struct game_board_t* board_new(unsigned int width, unsigned int height)
 {
-	int i; int j;
+	struct game_board_t* board = malloc(sizeof(struct game_board_t));
+	if (board == NULL)
+		return NULL;
 
-	srand(time(NULL));
+	/* We'll create a 2D matrix of cells */
+	board->cell = calloc(width, sizeof(struct game_cell_t*));
+	if (board->cell == NULL)
+		return NULL;
 
-	for (i = 0; i < GAME_TABLE_WIDTH; i++)
+	unsigned int i, j;
+	for (i = 0; i < width; i++)
 	{
-		for (j = 0; j < GAME_TABLE_HEIGHT; j++)
-		{
-			board->cell[i][j].flooded = false;
+		board->cell[i] = calloc(height, sizeof(struct game_cell_t));
 
+		if (board->cell[i] == NULL)
+			return NULL;
+
+		/* Yes, I should've freed() everything up til now
+		 * But if this function fails, I expect the program to
+		 * abort. Then, all memory malloc()'d will be free()'d
+		 * by the operational system.
+		 */
+	}
+
+
+	/* Initializing all cells */
+	for (i = 0; i < width; i++)
+	{
+		for (j = 0; j < height; j++)
+		{
 			/* Random color within all possible cell colors */
 			int index = random_int_between(0, 5);
 			board->cell[i][j].color = engine.colors[index];
+
+			board->cell[i][j].flooded = false;
 		}
 	}
 
-	board->flood_count = 0;
+	board->width       = width;
+	board->height      = height;
+	board->flood_count = 1;
 	board->moves       = 0;
 	board->last_color  = board->cell[0][0].color;
+
+	return board;
+}
+void board_free(struct game_board_t* board)
+{
+	if (board == NULL)
+		return;
+
+	unsigned int i;
+	for (i = 0; i < (board->width); i++)
+		free(board->cell[i]);
+
+	free(board->cell);
+	free(board);
+	board = NULL;
+}
+
+void game_init(struct game_board_t *board)
+{
+	srand(time(NULL));
 
 	flood(board, 0, 0, board->cell[0][0].color);
 }
 
-bool game_is_over(struct game_board *board)
+bool game_is_over(struct game_board_t *board)
 {
-	if (board->flood_count == (GAME_TABLE_WIDTH * GAME_TABLE_HEIGHT))
-		return true;
-	else
-		return false;
+	return (board->flood_count == (board->width*board->height));
 }
 
-int flood(struct game_board *board, int x, int y, color_pair_t pair)
+int flood(struct game_board_t *board, unsigned int x, unsigned int y, color_pair_t pair)
 {
-	if ((x >= GAME_TABLE_WIDTH) || (y >= GAME_TABLE_HEIGHT))
+	if ((x >= board->width) || (y >= board->height))
 		return 1;
 
 	if ((x < 0) || (y < 0))
@@ -65,7 +106,6 @@ int flood(struct game_board *board, int x, int y, color_pair_t pair)
 			board->cell[x][y].flooded = true;
 			board->flood_count++;
 		}
-
 		else
 		{
 			/* Cell's not flooded and the color is not the same */

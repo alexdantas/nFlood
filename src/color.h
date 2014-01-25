@@ -61,7 +61,7 @@
 typedef short  color_t;
 typedef chtype color_pair_t;
 
-#define COLOR_DEFAULT
+#define COLOR_DEFAULT -1
 
 /** Initializes color support and all color pairs.
  *  @return false (0) if something weird happened, else true (1).

@@ -59,13 +59,13 @@ void engine_exit();
 bool engine_set_center(bool center);
 
 /** Center the board or not */
-int engine_center_board(struct game_board *board, int score, bool center, bool redraw);
+int engine_center_board(struct game_board_t *board, int score, bool center, bool redraw);
 
 /** Draws the entire game board (with all those colored squares) */
-void engine_draw_ui(struct game_board *board, int hscore);
+void engine_draw_ui(struct game_board_t *board, int hscore);
 
 /** Draws the colored `board` with the game. */
-void engine_draw_board(struct game_board *board);
+void engine_draw_board(struct game_board_t *board);
 
 /** Checks if board is at center */
 bool is_center();
