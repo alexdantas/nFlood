@@ -28,6 +28,9 @@ int main(int argc, char* argv[])
 	}
 	engine_set_center(options.center);
 
+	options.game_width = 5;
+	options.game_height = 5;
+
 	struct game_board_t* board = board_new(options.game_width,
 	                                       options.game_height);
 	if (board == NULL)
@@ -132,12 +135,9 @@ int main(int argc, char* argv[])
 				   engine.center_top + 9,
 				   strlen("q: Quit"),
 				   1))
-			{
-				engine_exit();
-				return 0;
-			}
-
+				will_quit = true;
 			break;
+
 		default:
 			break;
 		}
@@ -163,7 +163,6 @@ int main(int argc, char* argv[])
 			if (board->moves < hscore)
 				hscore_store(board->moves);
 		}
-		napms(100);
 	}
 	board_free(board);
 	engine_exit();

@@ -23,30 +23,7 @@
 
 #include <stdbool.h>
 #include "color.h"
-
-struct game_cell_t
-{
-	color_pair_t color;
-	bool flooded;
-};
-
-struct game_board_t
-{
-	struct game_cell_t** cell; /**< The raw cells (2d matrix) */
-	unsigned int width;
-	unsigned int height;
-
-	int flood_count;           /**< How many cells are flooded */
-	int moves;                 /**< How many moves player did  */
-
-	color_pair_t last_color;   /**< Last flooded color */
-};
-
-/** Creates a new board with `width` and `height` */
-struct game_board_t* board_new(unsigned int width, unsigned int height);
-
-/** Frees the content of `board` */
-void board_free(struct game_board_t* board);
+#include "board.h"
 
 /** Initializes the `board` with random colors for
  *  all cells, cleaning the `flooded` state.
@@ -56,11 +33,6 @@ void game_init(struct game_board_t *board);
 /** Tells if the board is completely flooded.
  */
 bool game_is_over(struct game_board_t *board);
-
-/** Recursive function that floads `board` on `x`/`y`
- *  with color `pair`.
- */
-int flood(struct game_board_t *board, unsigned int x, unsigned int y, color_pair_t pair);
 
 /** Returns a random integer between the limits
  *  passed as parameters.
