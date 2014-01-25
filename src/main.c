@@ -21,7 +21,6 @@ int main(int argc, char* argv[])
 
 	struct game_board board;
 	int hscore;
-	printf("m %p\n", &options.center);
 
 	if (engine_init() == -1)
 	{
@@ -38,23 +37,28 @@ int main(int argc, char* argv[])
 	engine_draw_ui(&board, hscore);
 	engine_draw_board(&board);
 
-	int c = 0;
-	while (c != 'q')
+	bool will_quit = false;
+	while (!will_quit)
 	{
-		int will_flood = 0;
-		int color = 0;
+		bool will_flood = false;
 		MEVENT event;
+		color_pair_t color = board.cell[0][0].color;
 
-		c = getch();
+		int c = getch();
 
 		switch (c)
 		{
-		case '1': will_flood = 1; color = BLUE_DEFAULT;    break;
-		case '2': will_flood = 1; color = MAGENTA_DEFAULT; break;
-		case '3': will_flood = 1; color = RED_DEFAULT;     break;
-		case '4': will_flood = 1; color = YELLOW_DEFAULT;  break;
-		case '5': will_flood = 1; color = GREEN_DEFAULT;   break;
-		case '6': will_flood = 1; color = WHITE_DEFAULT;   break;
+		case 'q':
+			will_quit = true;
+			break;
+
+		case '1': will_flood = true; color = engine.colors[0]; break;
+		case '2': will_flood = true; color = engine.colors[1]; break;
+		case '3': will_flood = true; color = engine.colors[2]; break;
+		case '4': will_flood = true; color = engine.colors[3]; break;
+		case '5': will_flood = true; color = engine.colors[4]; break;
+		case '6': will_flood = true; color = engine.colors[5]; break;
+
 		case 'c':
 			engine_center_board(&board, hscore, !is_center(), TRUE);
 			break;
@@ -79,7 +83,7 @@ int main(int argc, char* argv[])
 					   1))
 				{
 					color = i;
-					will_flood = 1;
+					will_flood = true;
 					break;
 				}
 			}
@@ -92,7 +96,7 @@ int main(int argc, char* argv[])
 				   GAME_TABLE_WIDTH*2,
 				   GAME_TABLE_HEIGHT))
 			{
-				will_flood = 1;
+				will_flood = true;
 				color = board.cell[(event.x - (engine.center_left + 16)) / 2][event.y - engine.center_top].color;
 			}
 
@@ -126,12 +130,12 @@ int main(int argc, char* argv[])
 		}
 
 		if (game_is_over(&board))
-			continue;
+			will_quit = true;
 
-		if (will_flood && board.last_color != color)
+		if (will_flood && (board.last_color != color))
 		{
 			flood(&board, 0, 0, color);
-			will_flood = 0;
+			will_flood = false;
 			board.last_color = color;
 			board.moves++;
 		}

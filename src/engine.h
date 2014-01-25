@@ -38,9 +38,12 @@ struct engine_t
 {
 	int width;
 	int height;
-	int center_top;         /**< y offset to center the game */
-	int center_left;        /**< x offset to center the game */
-	chtype cell_appearance; /**< how we'll show game's cells */
+	int center_top;           /**< y offset to center the game */
+	int center_left;          /**< x offset to center the game */
+	chtype cell_appearance;   /**< how we'll show game's cells */
+	color_pair_t colors[6];   /**< The colors of the cells */
+	color_pair_t text;        /**< Color of the visible text */
+	color_pair_t hilite;      /**< Color of the highlighted text */
 };
 
 /** Global `engine` data structure. */
@@ -53,7 +56,7 @@ int engine_init();
 void engine_exit();
 
 /** Set top-left corner of the board */
-int engine_set_center(bool center);
+bool engine_set_center(bool center);
 
 /** Center the board or not */
 int engine_center_board(struct game_board *board, int score, bool center, bool redraw);
@@ -64,19 +67,16 @@ void engine_draw_ui(struct game_board *board, int hscore);
 /** Draws the colored `board` with the game. */
 void engine_draw_board(struct game_board *board);
 
-/** Changes `color` so things we show on the screen will have it. */
-void change_color(color_t color);
-
 /** Checks if board is at center */
 bool is_center();
 
 bool is_hit(int x, int y, int tx, int ty, int tw, int th);
 
 /** Shows char `c` on `x`/`y` with `color`. */
-void print_char(int x, int y, const chtype c, color_t color);
+void print_char(int x, int y, const chtype c, color_pair_t pair);
 
 /** Shows `str` on `x`/`y` with `color`. */
-void print_string(int x, int y, char* str, color_t color);
+void print_string(int x, int y, const char* str, color_pair_t pair);
 
 #endif /* ENGINE_H_DEFINED */
 

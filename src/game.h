@@ -22,6 +22,7 @@
 #define GAME_H_DEFINED
 
 #include <stdbool.h>
+#include "color.h"
 
 enum flooded_state
 {
@@ -34,7 +35,7 @@ enum flooded_state
 
 struct game_cell
 {
-	int color;
+	color_pair_t color;
 	bool flooded;
 };
 
@@ -42,9 +43,9 @@ struct game_board
 {
 	struct game_cell cell[GAME_TABLE_WIDTH][GAME_TABLE_HEIGHT];
 	int finished;
-	int flood_count; /** Keeps counting how many cells have been flooded */
+	int flood_count;        /**< How many cells have been flooded */
 	int moves;
-	int last_color; /** last flooded color */
+	color_pair_t last_color; /**< Last flooded color */
 };
 
 /** Initializes the `board` with random colors for
@@ -57,9 +58,9 @@ void game_init(struct game_board *board);
 bool game_is_over(struct game_board *board);
 
 /** Recursive function that floads `board` on `x`/`y`
- *  with `color`.
+ *  with color `pair`.
  */
-int flood(struct game_board *board, int x, int y, int color);
+int flood(struct game_board *board, int x, int y, color_pair_t pair);
 
 /** Returns a random integer between the limits
  *  passed as parameters.

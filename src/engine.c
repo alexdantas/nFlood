@@ -6,7 +6,7 @@ int engine_init()
 {
 	initscr();
 
-	if (engine_set_center(TRUE))
+	if (!engine_set_center(true))
 		return -1;
 
 	/* Default cell appearance - nice checkboard */
@@ -22,6 +22,16 @@ int engine_init()
 		 */
 	}
 
+	/* default cell colors */
+	engine.colors[0] = color_pair_from_string("blue",    "default");
+	engine.colors[1] = color_pair_from_string("magenta", "default");
+	engine.colors[2] = color_pair_from_string("red",     "default");
+	engine.colors[3] = color_pair_from_string("yellow",  "default");
+	engine.colors[4] = color_pair_from_string("green",   "default");
+	engine.colors[5] = color_pair_from_string("white",   "default");
+	engine.text      = color_pair_from_string("white",   "default");
+	engine.hilite    = color_pair_from_string("red",     "default");
+
 	cbreak();
 	curs_set(0);
 	noecho();
@@ -29,27 +39,23 @@ int engine_init()
 	refresh();
 
 	mousemask(BUTTON1_CLICKED, NULL);
-	color_customize(COLOR_MAGENTA, 0, 0, 1000);
 	return 0;
 }
 
 void engine_exit()
 {
-	if (options.colors)
-		color_exit();
-
 	erase();
 	refresh();
 	endwin();
 }
 
-int engine_set_center(bool center)
+bool engine_set_center(bool center)
 {
 	if (!center)
 	{
 		engine.center_top = NOT_CENTER_TOP;
 		engine.center_left = NOT_CENTER_LEFT;
-		return 0;
+		return true;
 	}
 
 	/* Getting current width and height */
@@ -60,7 +66,7 @@ int engine_set_center(bool center)
 	    (current_height < GAME_UI_HEIGHT))
 	{
 		endwin();
-		return -1;
+		return false;
 	}
 	engine.width  = current_width;
 	engine.height = current_height;
@@ -68,7 +74,7 @@ int engine_set_center(bool center)
 	engine.center_top  = engine.height/2 - GAME_UI_HEIGHT/2;
 	engine.center_left = engine.width/2  - GAME_UI_WIDTH/2;
 
-	return 0;
+	return true;
 }
 
 int engine_center_board(struct game_board *board, int hscore, bool center, bool redraw)
@@ -97,39 +103,40 @@ void engine_draw_ui(struct game_board *board, int hscore)
 		int i, x, y;
 		for (i = 1; i <= 6; i++)
 		{
-			if (i == board->last_color)
+			if (engine.colors[i - 1] == board->last_color)
 				continue;
 
 			y = (i - 1)/4;
-			x = i - 1 - 4*y;
+			x =  i - 1 - 4*y;
 
 			print_char(engine.center_left + 3*x + 1,
 			           engine.center_top + 3*y,
 			           engine.cell_appearance,
-			           i);
+			           engine.colors[i - 1]);
+
 			print_char(engine.center_left + 3*x + 2,
 			           engine.center_top + 3*y,
 			           engine.cell_appearance,
-			           i);
+			           engine.colors[i - 1]);
 
 			print_char(engine.center_left + 3*x + 1,
 			           engine.center_top + 3*y + 1,
 			           '1' + (i - 1),
-			           WHITE_DEFAULT);
+			           engine.text);
 		}
-		print_string(engine.center_left + 13, engine.center_top, "->", WHITE_DEFAULT);
+		print_string(engine.center_left + 13, engine.center_top, "->", engine.text);
 	}
 	else
 	{
-		change_color(WHITE_DEFAULT);
+		color_activate(COLOR_WHITE, COLOR_BLACK);
 		mvaddstr(engine.center_top,     engine.center_left + 1, "Congrats!");
 		mvaddstr(engine.center_top + 1, engine.center_left + 1, "one more game?");
 	}
 
-	print_string(engine.center_left + 1, engine.center_top + 6, "nFlood v" VERSION, WHITE_DEFAULT);
+	print_string(engine.center_left + 1, engine.center_top + 6, "nFlood v" VERSION, engine.text);
 
-	print_string(engine.center_left + 1, engine.center_top + 8, "r: New Game", WHITE_DEFAULT);
-	print_string(engine.center_left + 1, engine.center_top + 9, "q: Quit", WHITE_DEFAULT);
+	print_string(engine.center_left + 1, engine.center_top + 8, "r: New Game", engine.text);
+	print_string(engine.center_left + 1, engine.center_top + 9, "q: Quit", engine.text);
 
 	mvprintw(engine.center_top + 11, engine.center_left + 1, "Moves:   %d", board->moves);
 	mvprintw(engine.center_top + 12, engine.center_left + 1, "Best:    %d", hscore);
@@ -156,13 +163,6 @@ void engine_draw_board(struct game_board *board)
 		}
 	}
 }
-
-void change_color(color_t color)
-{
-	if (options.colors)
-		attrset(COLOR_PAIR(color));
-}
-
 bool is_center()
 {
 	return !(engine.center_top == NOT_CENTER_TOP && engine.center_left == NOT_CENTER_LEFT);
@@ -172,14 +172,14 @@ bool is_hit(int x, int y, int tx, int ty, int tw, int th)
 {
 	return x >= tx && x < tx + tw && y >= ty && y < ty + th;
 }
-void print_char(int x, int y, const chtype c, color_t color)
+void print_char(int x, int y, const chtype c, color_pair_t pair)
 {
-	change_color(color);
+	color_pair_activate(pair);
 	mvaddch(y, x, c);
 }
-void print_string(int x, int y, char* str, color_t color)
+void print_string(int x, int y, const char* str, color_pair_t pair)
 {
-	change_color(color);
+	color_pair_activate(pair);
 	mvaddstr(y, x, str);
 }
 
