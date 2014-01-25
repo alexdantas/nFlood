@@ -98,7 +98,7 @@ int main(int argc, char* argv[])
 					   2,
 					   1))
 				{
-					color = i;
+					color = engine.colors[i - 1];
 					will_flood = true;
 					break;
 				}
