@@ -71,8 +71,8 @@ bool engine_set_center(bool center)
 	engine.width  = current_width;
 	engine.height = current_height;
 
-	engine.center_top  = engine.height/2 - GAME_UI_HEIGHT/2;
-	engine.center_left = engine.width/2  - GAME_UI_WIDTH/2;
+	engine.center_top  = engine.height/2 - options.game_height/2;
+	engine.center_left = engine.width/2  - (options.game_width*2 + 15)/2 - 1;
 
 	return true;
 }

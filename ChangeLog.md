@@ -8,6 +8,7 @@
 
 * Add <kbd>c</kbd> key for toggling centering board.
 * Add `-c`, `--center` for starting up with centered board.
+* Add `-W`, `--width`, `-H`, `--height` for game board size.
 
 ## Version 0.5.0 (2014-01-23)
 

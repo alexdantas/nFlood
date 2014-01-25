@@ -25,10 +25,12 @@ Then, simply download (or `git clone` it) and `make` it
 
 ## Options
 
-| Options | Actions |
-| ------- | ------- |
+| Options | Actions | Defaults |
+| ------- | ------- | -------- |
 | `-h`, `--help`     | Shows help message |
 | `-v`, `--version`  | Shows game version and build date |
+| `-W <WIDTH>`, `--width <WIDTH>` | Sets width of the game board | 14 |
+| `-H <HEIGHT>`, `--height <HEIGHT>` | Sets height of the game board | 14 |
 | `-c`, `--center`   | Centers the game board |
 
 ## Screenshots

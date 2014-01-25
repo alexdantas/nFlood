@@ -26,10 +26,16 @@ int main(int argc, char* argv[])
 		fprintf(stderr, "ERROR: Failed to initialize nCurses");
 		return -1;
 	}
+	/* Ensure options.game_width and options.game_height fits into window */
+	if (options.game_width > (engine.width - 15) / 2 - 1)
+	{
+		options.game_width = (engine.width - 15) / 2 - 1;
+	}
+	if (options.game_height > engine.height - 2)
+	{
+		options.game_height = engine.height - 2;
+	}
 	engine_set_center(options.center);
-
-	options.game_width = 5;
-	options.game_height = 5;
 
 	struct game_board_t* board = board_new(options.game_width,
 	                                       options.game_height);

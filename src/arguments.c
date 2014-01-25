@@ -39,10 +39,28 @@ void help(command_t* self)
 	       "\n"
 	       "	-h, --help     Show this message\n"
 	       "	-v, --version  Show game version and build date\n"
+	       "	-W <WIDTH>, --width  <WIDTH>\n"
+	       "	               Set width of the game board\n"
+	       "	-H <HEIGHT>, --height <HEIGHT>\n"
+	       "	               Set height of the game board\n"
 	       "	-c, --center   Center the game board at start\n");
 
 	command_free(self);
 	exit(EXIT_SUCCESS);
+}
+
+void width(command_t* self)
+{
+	(void)(self);
+
+	options.game_width = atoi(self->arg);
+}
+
+void height(command_t* self)
+{
+	(void)(self);
+
+	options.game_height = atoi(self->arg);
 }
 
 void center(command_t* self)
@@ -60,6 +78,9 @@ void arguments_parse(int argc, char* argv[])
 
 	command_option(&cmd, "-v", "--version", "Show game version and build date", version);
 	command_option(&cmd, "-h", "--help",    "Show instructions", help);
+
+	command_option(&cmd, "-W", "--width <WIDTH>",  "Set width of the game board", width);
+	command_option(&cmd, "-H", "--height <HEIGHT>", "Set height of the game board", height);
 
 	command_option(&cmd, "-c", "--center", "Center the game board at start", center);
 
