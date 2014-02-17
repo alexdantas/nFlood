@@ -141,7 +141,7 @@ void engine_draw_ui(struct game_board_t *board, int hscore)
 	mvprintw(engine.center_top + 11, engine.center_left + 1, "Moves:   %d", board->moves);
 	mvprintw(engine.center_top + 12, engine.center_left + 1, "Best:    %d", hscore);
 
-	float percent = board->flood_count/(board->width * board->height) * 100;
+	float percent = 100.0 * board->flood_count/(board->width * board->height);
 	mvprintw(engine.center_top + 13, engine.center_left + 1, "Flooded: %.0f%%", percent);
 
 //	refresh();
