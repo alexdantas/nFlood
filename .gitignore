@@ -1,5 +1,7 @@
 # My git ignore file
 
+.depend
+
 obj/*
 *.o
 bin/nflood

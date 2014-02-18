@@ -67,6 +67,9 @@ LDFLAGS     = -lncurses
 INCLUDESDIR =
 LIBSDIR     =
 
+# Dependency
+DEPEND = .depend
+
 # All source files
 CFILES  = $(shell find src -type f -name '*.c')
 OBJECTS = $(CFILES:.c=.o)
@@ -88,8 +91,17 @@ MUTE = @
 endif
 
 # Make targets
-all: $(EXE)
+all: $(EXE) .depend
 	# Build successful!
+
+depend: $(DEPEND)
+$(DEPEND): $(CFILES)
+	# Making .depend...
+	$(MUTE)rm -f $(DEPEND)
+	$(MUTE)for src in $^; do \
+		$(CC) $(CFLAGS) -MM -MT $${src%.c}.o $$src >> $(DEPEND); \
+	done
+-include $(DEPEND)
 
 $(EXE): $(OBJECTS)
 	# Linking...
@@ -140,6 +152,7 @@ run: all
 
 clean:
 	# Cleaning files...
+	$(MUTE)rm $(VTAG) -f $(DEPEND)
 	$(MUTE)rm $(VTAG) -f $(OBJECTS)
 	$(MUTE)rm $(VTAG) -f bin/$(EXE)
 
