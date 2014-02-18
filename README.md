@@ -49,6 +49,13 @@ Then, simply download (or `git clone` it) and `make` it
 | r             | Resets the game board |
 | c             | Toggles centering the game board |
 
+## High scores
+
+The high scores file is stored at `~/.local/share/nflood/nflood.scores`.
+
+The game only ranks your score when you are playing at default board size, that
+is 14x14.
+
 ## Authors
 
 * Copyright (C) 2011-2014  Alexandre Dantas <eu@alexdantas.net>

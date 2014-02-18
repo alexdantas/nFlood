@@ -3,6 +3,9 @@
 
 #include "color.h"
 
+#define DEFAULT_BOARD_WIDTH		14
+#define DEFAULT_BOARD_HEIGHT	14
+
 struct game_cell_t
 {
 	color_pair_t color;

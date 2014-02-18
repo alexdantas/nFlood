@@ -19,13 +19,14 @@
  */
 
 #include <stdbool.h>
+#include "board.h"
 #include "options.h"
 
 void options_init()
 {
 	options.center      = false;
 	options.colors      = true;
-	options.game_width  = 14;
-	options.game_height = 14;
+	options.game_width  = DEFAULT_BOARD_WIDTH;
+	options.game_height = DEFAULT_BOARD_HEIGHT;
 }
 

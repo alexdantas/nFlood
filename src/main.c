@@ -163,7 +163,9 @@ int main(int argc, char* argv[])
 		engine_draw_ui(board, hscore);
 		engine_draw_board(board);
 
-		if (game_is_over(board))
+		if (game_is_over(board) &&
+		    board->width  == DEFAULT_BOARD_WIDTH &&
+			board->height == DEFAULT_BOARD_HEIGHT)
 		{
 			hscore = hscore_get();
 			if (board->moves < hscore)
