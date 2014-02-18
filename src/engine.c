@@ -138,15 +138,15 @@ void engine_draw_ui(struct game_board_t *board, int hscore)
 	print_string(engine.center_left + 1, engine.center_top + 8, "r: New Game", engine.text);
 	print_string(engine.center_left + 1, engine.center_top + 9, "q: Quit", engine.text);
 
-	mvprintw(engine.center_top + 11, engine.center_left + 1, "Moves:   %d", board->moves);
+	mvprintw(engine.center_top + 11, engine.center_left + 1, "Moves: %6d", board->moves);
 
 	if (board->width  == DEFAULT_BOARD_WIDTH && board->height == DEFAULT_BOARD_HEIGHT)
-		mvprintw(engine.center_top + 12, engine.center_left + 1, "Best:    %d", hscore);
+		mvprintw(engine.center_top + 12, engine.center_left + 1, "Best: %7d", hscore);
 	else
 		mvprintw(engine.center_top + 12, engine.center_left + 1, "Best: Unranked");
 
 	float percent = 100.0 * board->flood_count/(board->width * board->height);
-	mvprintw(engine.center_top + 13, engine.center_left + 1, "Flooded: %.0f%%", percent);
+	mvprintw(engine.center_top + 13, engine.center_left + 1, "Flooded: %4.0f%%", percent);
 
 //	refresh();
 }
